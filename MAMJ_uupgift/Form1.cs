@@ -13,6 +13,7 @@ namespace MAMJ_uupgift
     public partial class Form1 : Form
     {
         public Form1()
+            //hej du
         {
             InitializeComponent();
         }
