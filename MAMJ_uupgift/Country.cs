@@ -13,7 +13,6 @@ namespace MAMJ_uupgift
         private int countryInvånare;
         private int countryBnpPerCapita;
         
-        
 
 
         // constructor
@@ -22,6 +21,8 @@ namespace MAMJ_uupgift
             countryNamn = CountryNamn;
             countryInvånare = CountryInvånare;
             countryBnpPerCapita = CountryBnpPerCapita;
+            Accommodates = accommodates;
+
             
         }
         // getter setters

@@ -8,21 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MAMJ_uupgift
 {
     public partial class Form1 : Form
     {
         SqlConnection conn = new SqlConnection();
-        private Country valCountryUsa;
-        private Country valCountrySpanien;
         private Country valCountrySaintLucia;
 
         public Form1()
            
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Airbnb; Integrated Security=True";
+            conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Projekt_airbnb; Integrated Security=True";
         }
         private List<Accomodation> GetData(string myCountry)
         {
@@ -121,22 +120,33 @@ namespace MAMJ_uupgift
         }
         private void CountryData()
         {
-            List<Accomodation> usaList = GetData("Usa");
-            Country Usa1 = new Country("Usa", 0, 0, usaList);
-            List<Accomodation> spanienList = GetData("Spanien");
-            Country Spanien1 = new Country("Spanien",  0, 0, spanienList);
-            List<Accomodation> saintLuciaList = GetData("Saint_lucia");
-            Country SaintLucia1 = new Country("Saint_lucia", 0, 0, saintLuciaList);
+            
+            List<Accomodation> saintLuciaList = GetData("Saint_Lucia");
+            Country SaintLucia1 = new Country("Saint_Lucia", 0, 0, saintLuciaList);
 
-            valCountryUsa = Usa1;
-            valCountrySpanien = Spanien1;
+          
             valCountrySaintLucia = SaintLucia1;
 
 
         }
+        private void plotchartBo()
+        {
+            List<Accomodation> scatterList = valCountrySaintLucia.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart1.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart1.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            CountryData();
+            plotchartBo();
 
         }
     }
