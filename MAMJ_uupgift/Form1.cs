@@ -163,8 +163,9 @@ namespace MAMJ_uupgift
         {
             CountryData();
             plotchartSaintLucia();
-            plotchartSpanien()
+            plotchartSpanien();
 
         }
+
     }
 }
