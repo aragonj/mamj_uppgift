@@ -16,6 +16,7 @@ namespace MAMJ_uupgift
     {
         SqlConnection conn = new SqlConnection();
         private Country valCountrySaintLucia;
+        private Country valCountrySpanien;
 
         public Form1()
            
@@ -123,13 +124,15 @@ namespace MAMJ_uupgift
             
             List<Accomodation> saintLuciaList = GetData("Saint_Lucia");
             Country SaintLucia1 = new Country("Saint_Lucia", 0, 0, saintLuciaList);
+            List<Accomodation> spanienList = GetData("Spanien");
+            Country Spanien1 = new Country("Spanien", 0, 0, spanienList);
 
-          
             valCountrySaintLucia = SaintLucia1;
+            valCountrySpanien = Spanien1;
 
 
         }
-        private void plotchartBo()
+        private void plotchartSaintLucia()
         {
             List<Accomodation> scatterList = valCountrySaintLucia.Accommodates;
 
@@ -142,11 +145,25 @@ namespace MAMJ_uupgift
             }
             chart1.Series["Series1"].ChartType = SeriesChartType.Column;
         }
+        private void plotchartSpanien()
+        {
+            List<Accomodation> scatterList = valCountrySpanien.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart2.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart2.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             CountryData();
-            plotchartBo();
+            plotchartSaintLucia();
+            plotchartSpanien()
 
         }
     }
