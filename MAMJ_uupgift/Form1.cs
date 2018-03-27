@@ -16,6 +16,16 @@ namespace MAMJ_uupgift
     {
         SqlConnection conn = new SqlConnection();
         private Country valCountrySaintLucia;
+        private Country valCountrySpanien;
+        private Country valCountryUsa;
+        private Country valCountryPortugal;
+        private Country valCountryAustralia;
+        private Country valCountryBrazil;
+        private Country valCountrySriLanka;
+        private Country valCountryEngland;
+        private Country valCountryFrankrike;
+        private Country valCountryItalien;
+
 
         public Form1()
            
@@ -123,13 +133,41 @@ namespace MAMJ_uupgift
             
             List<Accomodation> saintLuciaList = GetData("Saint_Lucia");
             Country SaintLucia1 = new Country("Saint_Lucia", 0, 0, saintLuciaList);
+            List<Accomodation> spanienList = GetData("Spanien");
+            Country Spanien1 = new Country("Spanien", 0, 0, spanienList);
+            List<Accomodation> usaList = GetData("Usa");
+            Country Usa1 = new Country("Usa", 0, 0, usaList);
+            List<Accomodation> portugalList = GetData("Portugal");
+            Country Portugal1 = new Country("Portugal", 0, 0, portugalList);
+            List<Accomodation> australiaList = GetData("Australia");
+            Country Australia1 = new Country("Australia", 0, 0, australiaList);
+            List<Accomodation> brazilList = GetData("Brazil");
+            Country Brazil1 = new Country("Brazil", 0, 0, brazilList);
+            List<Accomodation> sriLankaList = GetData("Sri_Lanka");
+            Country SriLanka1 = new Country("Sri_Lanka", 0, 0, sriLankaList);
+            List<Accomodation> englandList = GetData("England");
+            Country England1 = new Country("England", 0, 0, englandList);
+            List<Accomodation> frankrikeList = GetData("Frankrike");
+            Country Frankrike1 = new Country("Frankrike", 0, 0, frankrikeList);
+            List<Accomodation> italienList = GetData("Italien");
+            Country Italien1 = new Country("Italien", 0, 0, italienList);
 
-          
+
             valCountrySaintLucia = SaintLucia1;
+            valCountrySpanien = Spanien1;
+            valCountryUsa = Usa1;
+            valCountryPortugal = Portugal1;
+            valCountryBrazil = Brazil1;
+            valCountrySriLanka = SriLanka1;
+            valCountryEngland = England1;
+            valCountryFrankrike = Frankrike1;
+            valCountryItalien = Italien1;
+            valCountryAustralia = Australia1;
 
 
-        }
-        private void plotchartBo()
+
+    }
+        private void plotchartSaintLucia()
         {
             List<Accomodation> scatterList = valCountrySaintLucia.Accommodates;
 
@@ -142,11 +180,157 @@ namespace MAMJ_uupgift
             }
             chart1.Series["Series1"].ChartType = SeriesChartType.Column;
         }
+        private void plotchartSpanien()
+        {
+            List<Accomodation> scatterList = valCountrySpanien.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart2.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart2.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartUsa()
+        {
+            List<Accomodation> scatterList = valCountryUsa.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart3.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart3.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartPortugal()
+        {
+            List<Accomodation> scatterList = valCountryPortugal.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart4.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart4.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartBrazil()
+        {
+            List<Accomodation> scatterList = valCountryBrazil.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart5.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart5.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartSriLanka()
+        {
+            List<Accomodation> scatterList = valCountrySriLanka.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart6.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart6.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartEngland()
+        {
+            List<Accomodation> scatterList = valCountryEngland.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart7.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart7.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartFrankrike()
+        {
+            List<Accomodation> scatterList = valCountryFrankrike.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart8.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart8.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartItalien()
+        {
+            List<Accomodation> scatterList = valCountryItalien.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart9.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart9.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
+        private void plotchartAustralien()
+        {
+            List<Accomodation> scatterList = valCountryAustralia.Accommodates;
+
+            var spridning = from f in scatterList
+                            where f.Room_type == "Entire home/apt"
+                            select new { f.Price };
+            foreach (var b in spridning)
+            {
+                chart10.Series["Series1"].Points.AddY(b.Price);
+            }
+            chart10.Series["Series1"].ChartType = SeriesChartType.Column;
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             CountryData();
-            plotchartBo();
+            plotchartSaintLucia();
+            plotchartSpanien();
+            plotchartUsa();
+            plotchartPortugal();
+            plotchartItalien();
+            plotchartSriLanka();
+            plotchartAustralien();
+            plotchartEngland();
+            plotchartFrankrike();
+            plotchartBrazil();
+
+        }
+
+        private void chart3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
 
         }
     }
