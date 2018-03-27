@@ -33,6 +33,14 @@ namespace MAMJ_uupgift
             InitializeComponent();
             conn.ConnectionString = "Data Source=DESKTOP-VRGDF71; Initial Catalog=Projekt_airbnb; Integrated Security=True";
         }
+
+        /// <summary> <c>GetData</c>
+        /// is a method returning a list of Accomodations from an SQL-table with existing connection "conn" </summary>
+        /// <param name="myCountry"> Must be a name from an existing table in the SQL database "conn"
+        /// with tables matching the values in the class Accomodation</param>
+        /// <seealso cref="Accomodation">
+        /// An established class based on the values from the AirBnB-database. </seealso>
+        /// <returns> A list containing all rows from the SQL-table "myCountry" </returns>
         private List<Accomodation> GetData(string myCountry)
         {
 
@@ -128,6 +136,10 @@ namespace MAMJ_uupgift
             return accomodationsList;
 
         }
+
+        /// <summary>
+        /// Uses <c>GetData</c> multiple time to set the Accomodation list for varius Country-objects.
+        /// </summary>
         private void CountryData()
         {
             
@@ -163,9 +175,6 @@ namespace MAMJ_uupgift
             valCountryFrankrike = Frankrike1;
             valCountryItalien = Italien1;
             valCountryAustralia = Australia1;
-
-
-
     }
         private void plotchartSaintLucia()
         {
@@ -298,6 +307,11 @@ namespace MAMJ_uupgift
             chart10.Series["Series1"].ChartType = SeriesChartType.Column;
         }
 
+        /// <summary>
+        /// Load windows form with charts based on AirBnB data
+        /// </summary>
+        /// <param name="sender"> I dont know C# that well, probobly possible starting arguments</param>
+        /// <param name="e">Could be something</param>
         private void Form1_Load(object sender, EventArgs e)
         {
             CountryData();
@@ -311,7 +325,6 @@ namespace MAMJ_uupgift
             plotchartEngland();
             plotchartFrankrike();
             plotchartBrazil();
-
         }
 
         private void chart3_Click(object sender, EventArgs e)
