@@ -25,6 +25,7 @@ namespace MAMJ_uupgift
         private Country valCountryEngland;
         private Country valCountryFrankrike;
         private Country valCountryItalien;
+        private List<Country> world = new List<Country>();
 
 
         public Form1()
@@ -63,8 +64,6 @@ namespace MAMJ_uupgift
                 string Last_modified; string letOS; // tillfälliga strängar som sedan konverteras till double
                 string letBed;
                 string letPrice;
-
-                // string letMS;
                 string letLat;
                 string letLong;
 
@@ -164,174 +163,39 @@ namespace MAMJ_uupgift
             valCountryItalien = Italien1;
             valCountryAustralia = Australia1;
 
+            world.Add(SaintLucia1);
+            world.Add(Spanien1);
+            world.Add(Usa1);
+            world.Add(Portugal1);
+            world.Add(Brazil1);
+            world.Add(SriLanka1);
+            world.Add(England1);
+            world.Add(Frankrike1);
+            world.Add(Italien1);
+            world.Add(Australia1);
 
 
-    }
-        private void plotchartSaintLucia()
-        {
-            List<Accomodation> scatterList = valCountrySaintLucia.Accommodates;
 
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart1.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart1.Series["Series1"].ChartType = SeriesChartType.Column;
+
         }
-        private void plotchartSpanien()
+        private void AverageOverallSatisfaction()
         {
-            List<Accomodation> scatterList = valCountrySpanien.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
+            foreach (Country x in world)
             {
-                chart2.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart2.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartUsa()
-        {
-            List<Accomodation> scatterList = valCountryUsa.Accommodates;
 
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart3.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart3.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartPortugal()
-        {
-            List<Accomodation> scatterList = valCountryPortugal.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart4.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart4.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartBrazil()
-        {
-            List<Accomodation> scatterList = valCountryBrazil.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart5.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart5.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartSriLanka()
-        {
-            List<Accomodation> scatterList = valCountrySriLanka.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart6.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart6.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartEngland()
-        {
-            List<Accomodation> scatterList = valCountryEngland.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart7.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart7.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartFrankrike()
-        {
-            List<Accomodation> scatterList = valCountryFrankrike.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart8.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart8.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartItalien()
-        {
-            List<Accomodation> scatterList = valCountryItalien.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart9.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart9.Series["Series1"].ChartType = SeriesChartType.Column;
-        }
-        private void plotchartAustralien()
-        {
-            List<Accomodation> scatterList = valCountryAustralia.Accommodates;
-
-            var spridning = from f in scatterList
-                            where f.Room_type == "Entire home/apt"
-                            select new { f.Price };
-            foreach (var b in spridning)
-            {
-                chart10.Series["Series1"].Points.AddY(b.Price);
-            }
-            chart10.Series["Series1"].ChartType = SeriesChartType.Column;
+                chart1.Series["Series1"].Points.AddXY( x.CountryNamn, x.AverageOverall_satisfaction);
+                           }
+            chart1.Series["Series1"].ChartType = SeriesChartType.RangeColumn;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             CountryData();
-            plotchartSaintLucia();
-            plotchartSpanien();
-            plotchartUsa();
-            plotchartPortugal();
-            plotchartItalien();
-            plotchartSriLanka();
-            plotchartAustralien();
-            plotchartEngland();
-            plotchartFrankrike();
-            plotchartBrazil();
+            AverageOverallSatisfaction();
+            
 
         }
 
-        private void chart3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
