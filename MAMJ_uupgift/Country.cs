@@ -12,7 +12,7 @@ namespace MAMJ_uupgift
         private string countryNamn;
         private int countryInvånare;
         private int countryBnpPerCapita;
-        
+
 
 
         // constructor
@@ -22,8 +22,9 @@ namespace MAMJ_uupgift
             countryInvånare = CountryInvånare;
             countryBnpPerCapita = CountryBnpPerCapita;
             Accommodates = accommodates;
+            AverageOverall_satisfaction = accommodates.Average(a => a.Overall_satisfaction);
 
-            
+
         }
         // getter setters
         public string CountryNamn
@@ -42,6 +43,8 @@ namespace MAMJ_uupgift
             set { countryBnpPerCapita = value; }
         }
         public List<Accomodation> Accommodates { get; } = new List<Accomodation>();
+
+        public double AverageOverall_satisfaction { get; set; }
 
     }
 }
