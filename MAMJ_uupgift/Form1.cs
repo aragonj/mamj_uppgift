@@ -191,11 +191,31 @@ namespace MAMJ_uupgift
         private void Form1_Load(object sender, EventArgs e)
         {
             CountryData();
-            AverageOverallSatisfaction();
-
+            
+            comboBox1.Items.Add("Best Price per bed");
+            comboBox1.Items.Add("Best satisfaction per price");
+            comboBox1.Items.Add("best all");
+            textBox1.Multiline = true;
+            textBox1.ScrollBars = ScrollBars.Both;
 
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "a")
+            {
 
+            }
+            else if (comboBox1.Text == "best all")
+            {
+                AverageOverallSatisfaction();
+            }
+            else if (comboBox1.Text == "c")
+            {
+
+            }
+            else { }
+
+        }
     }
 }
