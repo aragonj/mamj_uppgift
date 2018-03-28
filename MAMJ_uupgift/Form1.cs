@@ -186,6 +186,7 @@ namespace MAMJ_uupgift
             AveragePrice.Series["Countries"].Points.Clear();
             AveragePrice.Titles.Clear();
 
+
             if (ChoicePercountry == "AOS")
             {
                 foreach (Country x in world)
