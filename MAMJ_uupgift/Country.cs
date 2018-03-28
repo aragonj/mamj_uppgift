@@ -23,6 +23,8 @@ namespace MAMJ_uupgift
             countryBnpPerCapita = CountryBnpPerCapita;
             Accommodates = accommodates;
             AverageOverall_satisfaction = accommodates.Average(a => a.Overall_satisfaction);
+            AveragePrice = accommodates.Average(b => b.Price);
+            
 
 
         }
@@ -45,6 +47,7 @@ namespace MAMJ_uupgift
         public List<Accomodation> Accommodates { get; } = new List<Accomodation>();
 
         public double AverageOverall_satisfaction { get; set; }
+        public double AveragePrice { get; set; }
 
     }
 }
