@@ -35,7 +35,7 @@ namespace MAMJ_uupgift
 
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Projekt_airbnb; Integrated Security=True";
+            conn.ConnectionString = "Data Source=VAIO\\SQL2017;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
         private List<Accomodation> GetData(string myCountry)
         {
@@ -194,6 +194,7 @@ namespace MAMJ_uupgift
                 }
                 AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
                 AveragePrice.Titles.Add("Average Overall Satisfaction Per Country");
+
             }
 
             else if (ChoicePercountry == "APPC")
@@ -261,6 +262,16 @@ namespace MAMJ_uupgift
         }
 
         private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+       
+        private void AveragePrice_Click(object sender, EventArgs e)
         {
 
         }
