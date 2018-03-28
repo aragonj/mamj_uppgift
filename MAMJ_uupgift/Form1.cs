@@ -26,6 +26,9 @@ namespace MAMJ_uupgift
         private Country valCountryFrankrike;
         private Country valCountryItalien;
         private List<Country> world = new List<Country>();
+        private string ChoicePercountry;
+        private string ChoicePerCountry1;
+        private string ChoiceKpi;
 
 
         public Form1()
@@ -178,24 +181,88 @@ namespace MAMJ_uupgift
 
 
         }
-        private void AverageOverallSatisfaction()
+        private void ChartPerCountry()
         {
-            foreach (Country x in world)
-            {
+            AveragePrice.Series["Countries"].Points.Clear();
+            AveragePrice.Titles.Clear();
 
-                chart1.Series["Series1"].Points.AddXY(x.CountryNamn, x.AverageOverall_satisfaction);
+            if (ChoicePercountry == "AOS")
+            {
+                foreach (Country x in world)
+                {
+                    AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.AverageOverall_satisfaction);
+                }
+                AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
+                AveragePrice.Titles.Add("Average Overall Satisfaction Per Country");
             }
-            chart1.Series["Series1"].ChartType = SeriesChartType.RangeColumn;
+
+            else if (ChoicePercountry == "APPC")
+            {
+                foreach (Country x in world)
+                {
+
+                    AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.AveragePrice);
+                }
+                AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
+                AveragePrice.Titles.Add("Average Price Per Country");
+            }
+            else if (ChoicePercountry == "AOLPC")
+            {
+                foreach (Country x in world)
+                {
+
+                    AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.CountListings);
+                }
+                AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
+                AveragePrice.Titles.Add("Amount Listings Per Country");
+
+            }
+            else { }
         }
+
+        private void MappPerCountry()
+        {
+
+        }
+        
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
             CountryData();
-            AverageOverallSatisfaction();
-
+            AveragePrice.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+            comboBox1.Items.Add("Average Overall Satisfaction Per Country");
+            comboBox1.Items.Add("Average Price Per Country");
+            comboBox1.Items.Add("Amount Of Listing Per Country");
+            MappPerCountry();
+            
 
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.Text == "Average Overall Satisfaction Per Country")
+            {
+                ChoicePercountry="AOS";
+                ChartPerCountry();
+            }
+            else if (comboBox1.Text == "Average Price Per Country")
+            {
+                ChoicePercountry= "APPC";
+                ChartPerCountry();
+            }
+            else if (comboBox1.Text == "Amount Of Listing Per Country")
+            {
+                ChoicePercountry = "AOLPC";
+                ChartPerCountry();
+            }
+            else { }
 
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
