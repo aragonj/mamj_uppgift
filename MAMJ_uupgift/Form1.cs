@@ -27,6 +27,8 @@ namespace MAMJ_uupgift
         private Country valCountryItalien;
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
+        private string ChoicePerCountry1;
+        private string ChoiceKpi;
 
 
         public Form1()
@@ -179,9 +181,10 @@ namespace MAMJ_uupgift
 
 
         }
-        private void PerCountry()
+        private void ChartPerCountry()
         {
             AveragePrice.Series["Countries"].Points.Clear();
+            AveragePrice.Titles.Clear();
 
             if (ChoicePercountry == "AOS")
             {
@@ -208,13 +211,18 @@ namespace MAMJ_uupgift
                 foreach (Country x in world)
                 {
 
-                    AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.AverageOverall_satisfaction);
+                    AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.CountListings);
                 }
                 AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
                 AveragePrice.Titles.Add("Amount Listings Per Country");
 
             }
             else { }
+        }
+
+        private void MappPerCountry()
+        {
+
         }
         
         
@@ -226,7 +234,7 @@ namespace MAMJ_uupgift
             comboBox1.Items.Add("Average Overall Satisfaction Per Country");
             comboBox1.Items.Add("Average Price Per Country");
             comboBox1.Items.Add("Amount Of Listing Per Country");
-            PerCountry();
+            MappPerCountry();
             
 
         }
@@ -236,17 +244,17 @@ namespace MAMJ_uupgift
             if (comboBox1.Text == "Average Overall Satisfaction Per Country")
             {
                 ChoicePercountry="AOS";
-                PerCountry();
+                ChartPerCountry();
             }
             else if (comboBox1.Text == "Average Price Per Country")
             {
                 ChoicePercountry= "APPC";
-                PerCountry();
+                ChartPerCountry();
             }
             else if (comboBox1.Text == "Amount Of Listing Per Country")
             {
                 ChoicePercountry = "AOLPC";
-                PerCountry();
+                ChartPerCountry();
             }
             else { }
 

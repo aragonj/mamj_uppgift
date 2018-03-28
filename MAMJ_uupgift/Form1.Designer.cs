@@ -31,6 +31,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.AveragePrice = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -65,6 +66,8 @@
             this.AveragePrice.Size = new System.Drawing.Size(551, 300);
             this.AveragePrice.TabIndex = 0;
             this.AveragePrice.Text = "Average Overall Satisfaction per country";
+            title1.Name = "Title1";
+            this.AveragePrice.Titles.Add(title1);
             // 
             // comboBox1
             // 

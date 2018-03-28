@@ -24,7 +24,7 @@ namespace MAMJ_uupgift
             Accommodates = accommodates;
             AverageOverall_satisfaction = accommodates.Average(a => a.Overall_satisfaction);
             AveragePrice = accommodates.Average(b => b.Price);
-            
+            CountListings = accommodates.Count;
 
 
         }
@@ -48,6 +48,6 @@ namespace MAMJ_uupgift
 
         public double AverageOverall_satisfaction { get; set; }
         public double AveragePrice { get; set; }
-
+        public int CountListings { get; set; }
     }
 }
