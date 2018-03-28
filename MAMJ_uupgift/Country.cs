@@ -12,6 +12,8 @@ namespace MAMJ_uupgift
         private string countryNamn;
         private int countryInvånare;
         private int countryBnpPerCapita;
+        List<Accomodation> sat = new List<Accomodation>();
+        
 
 
 
@@ -22,7 +24,7 @@ namespace MAMJ_uupgift
             countryInvånare = CountryInvånare;
             countryBnpPerCapita = CountryBnpPerCapita;
             Accommodates = accommodates;
-            AverageOverall_satisfaction = accommodates.Average(a => a.Overall_satisfaction);
+            AverageOverall_satisfaction = (from x in accommodates where x.Overall_satisfaction > 0 select x.Overall_satisfaction).Average();
             AveragePrice = accommodates.Average(b => b.Price);
             CountListings = accommodates.Count;
 

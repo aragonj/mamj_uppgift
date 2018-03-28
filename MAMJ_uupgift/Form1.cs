@@ -35,7 +35,7 @@ namespace MAMJ_uupgift
 
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=VAIO\\SQL2017;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            conn.ConnectionString = "Data Source=DESKTOP-82O043O\\KURS6;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
         private List<Accomodation> GetData(string myCountry)
         {
@@ -186,6 +186,7 @@ namespace MAMJ_uupgift
             AveragePrice.Series["Countries"].Points.Clear();
             AveragePrice.Titles.Clear();
 
+
             if (ChoicePercountry == "AOS")
             {
                 foreach (Country x in world)
@@ -194,7 +195,6 @@ namespace MAMJ_uupgift
                 }
                 AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
                 AveragePrice.Titles.Add("Average Overall Satisfaction Per Country");
-
             }
 
             else if (ChoicePercountry == "APPC")
@@ -224,9 +224,199 @@ namespace MAMJ_uupgift
         private void MappPerCountry()
         {
 
+            if (ChoicePerCountry1 == "AU")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "BR")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "EN")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "FR")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            if (ChoicePerCountry1 == "IT")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "PO")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "SA")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "SP")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "SR")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "US")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else { }
+
+
         }
-        
-        
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -235,8 +425,27 @@ namespace MAMJ_uupgift
             comboBox1.Items.Add("Average Overall Satisfaction Per Country");
             comboBox1.Items.Add("Average Price Per Country");
             comboBox1.Items.Add("Amount Of Listing Per Country");
+
+            comboBox2.Items.Add("Australia");
+            comboBox2.Items.Add("Brazil");
+            comboBox2.Items.Add("England");
+            comboBox2.Items.Add("Frankrike");
+            comboBox2.Items.Add("Italien");
+            comboBox2.Items.Add("Portugal");
+            comboBox2.Items.Add("Saint Lucia");
+            comboBox2.Items.Add("Spanien");
+            comboBox2.Items.Add("Sri Lanka");
+            comboBox2.Items.Add("Usa");
+
+            comboBox3.Items.Add("Billigast");
+            comboBox3.Items.Add("Nöjdaste");
+            comboBox3.Items.Add("Kompromiss");
+
             MappPerCountry();
             
+            
+
+
 
         }
 
@@ -246,33 +455,179 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry="AOS";
                 ChartPerCountry();
+
+                // Gör att länderna får olika färger
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
+                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
+
+                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
+                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
+
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
+                AveragePrice.Series["Countries"].AxisLabel = "Usa";
+
+                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
+                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
+
+                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
+                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
+
+                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
+
+                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "England";
+
+                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
+
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Italien";
+
+                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Australia";
+
+
+
             }
             else if (comboBox1.Text == "Average Price Per Country")
             {
                 ChoicePercountry= "APPC";
                 ChartPerCountry();
+
+                // Gör att länderna får olika färger
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
+                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
+
+                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
+                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
+
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
+                AveragePrice.Series["Countries"].AxisLabel = "Usa";
+
+                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
+                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
+
+                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
+                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
+
+                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
+
+                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "England";
+
+                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
+
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Italien";
+
+                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Australia";
             }
             else if (comboBox1.Text == "Amount Of Listing Per Country")
             {
                 ChoicePercountry = "AOLPC";
                 ChartPerCountry();
+                // Gör att länderna får olika färger
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
+                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
+
+                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
+                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
+
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
+                AveragePrice.Series["Countries"].AxisLabel = "Usa";
+
+                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
+                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
+
+                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
+                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
+
+                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
+
+                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "England";
+
+                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
+
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Italien";
+
+                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
+                AveragePrice.Series["Countries"].AxisLabel = "Australia";
+
+
+
             }
             else { }
 
         }
 
-        private void chart1_Click(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (comboBox2.Text == "Australia")
+            {
+                ChoicePerCountry1 = "AU";
+            }
+            else if (comboBox2.Text == "Brazil")
+            {
+                ChoicePerCountry1 = "BR";
+            }
+            else if (comboBox2.Text == "England")
+            {
+                ChoicePerCountry1 = "EN";
+            }
+            else if (comboBox2.Text == "Frankrike")
+            {
+                ChoicePerCountry1 = "FR";
+            }
+            else if (comboBox2.Text == "Italien")
+            {
+                ChoicePerCountry1 = "IT";
+            }
+            else if (comboBox2.Text == "Portugal")
+            {
+                ChoicePerCountry1 = "PO";
+            }
+            else if (comboBox2.Text == "Saint Lucia")
+            {
+                ChoicePerCountry1 = "SA";
+            }
+            else if (comboBox2.Text == "Spanien")
+            {
+                ChoicePerCountry1 = "SP";
+            }
+            else if (comboBox2.Text == "Sri Lanka")
+            {
+                ChoicePerCountry1 = "SR";
+            }
+            else if (comboBox2.Text == "USA")
+            {
+                ChoicePerCountry1 = "US";
+            }
+            else {}
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-       
-        private void AveragePrice_Click(object sender, EventArgs e)
-        {
+            if (comboBox3.Text == "Billigast")
+            {
+                ChoiceKpi = "BI";
+            }
+            else if (comboBox3.Text == "Nöjdaste")
+            {
+                ChoiceKpi = "NO";
+            }
+            else if (comboBox3.Text == "Kompromiss")
+            {
+                ChoiceKpi = "KO";
+            }
+            else { }
 
         }
     }
