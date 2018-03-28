@@ -234,6 +234,17 @@ namespace MAMJ_uupgift
             comboBox1.Items.Add("Average Overall Satisfaction Per Country");
             comboBox1.Items.Add("Average Price Per Country");
             comboBox1.Items.Add("Amount Of Listing Per Country");
+            comboBox2.Items.Add("Australia");
+            comboBox2.Items.Add("Brazil");
+            comboBox2.Items.Add("England");
+            comboBox2.Items.Add("Frankrike");
+            comboBox2.Items.Add("Italien");
+            comboBox2.Items.Add("Portugal");
+            comboBox2.Items.Add("Saint Lucia");
+            comboBox2.Items.Add("Spanien");
+            comboBox2.Items.Add("Sri Lanka");
+            comboBox2.Items.Add("Usa");
+
             MappPerCountry();
             
 
@@ -260,9 +271,49 @@ namespace MAMJ_uupgift
 
         }
 
-        private void chart1_Click(object sender, EventArgs e)
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (comboBox2.Text == "Australia")
+            {
+                ChoicePerCountry1 = "Au";
+            }
+            else if (comboBox2.Text == "Brazil")
+            {
+                ChoicePerCountry1 = "BR";
+            }
+            else if (comboBox2.Text == "England")
+            {
+                ChoicePerCountry1 = "EN";
+            }
+            else if (comboBox2.Text == "Frankrike")
+            {
+                ChoicePerCountry1 = "FR";
+            }
+            else if (comboBox2.Text == "Italien")
+            {
+                ChoicePerCountry1 = "IT";
+            }
+            else if (comboBox2.Text == "Portugal")
+            {
+                ChoicePerCountry1 = "PO";
+            }
+            else if (comboBox2.Text == "Saint Lucia")
+            {
+                ChoicePerCountry1 = "SA";
+            }
+            else if (comboBox2.Text == "Spanien")
+            {
+                ChoicePerCountry1 = "SP";
+            }
+            else if (comboBox2.Text == "Sri Lanka")
+            {
+                ChoicePerCountry1 = "SR";
+            }
+            else if (comboBox2.Text == "USA")
+            {
+                ChoicePerCountry1 = "US";
+            }
+            else {}
         }
     }
 }

@@ -36,6 +36,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.AveragePrice)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,9 +73,9 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(618, 55);
+            this.comboBox1.Location = new System.Drawing.Point(604, 55);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(179, 21);
+            this.comboBox1.Size = new System.Drawing.Size(251, 21);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -94,12 +95,22 @@
             this.vScrollBar1.Size = new System.Drawing.Size(14, 657);
             this.vScrollBar1.TabIndex = 4;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(604, 378);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(251, 21);
+            this.comboBox2.TabIndex = 5;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(910, 749);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
@@ -119,6 +130,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
 
