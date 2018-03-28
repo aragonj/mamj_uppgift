@@ -32,7 +32,7 @@ namespace MAMJ_uupgift
 
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Projekt_airbnb; Integrated Security=True";
+            conn.ConnectionString = "Data Source=DESKTOP-82O043O\\KURS6;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
         private List<Accomodation> GetData(string myCountry)
         {
