@@ -223,6 +223,196 @@ namespace MAMJ_uupgift
         private void MappPerCountry()
         {
 
+            if (ChoicePerCountry1 == "AU")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "BR")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "EN")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "FR")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            if (ChoicePerCountry1 == "IT")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "PO")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "SA")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "SP")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "SR")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else if (ChoicePerCountry1 == "US")
+            {
+                if (ChoiceKpi == "BI")
+                {
+
+                }
+                else if (ChoiceKpi == "NO")
+                {
+
+                }
+                else if (ChoiceKpi == "KO")
+                {
+
+                }
+                else { }
+
+            }
+            else { }
+
+
         }
         
         
@@ -234,6 +424,7 @@ namespace MAMJ_uupgift
             comboBox1.Items.Add("Average Overall Satisfaction Per Country");
             comboBox1.Items.Add("Average Price Per Country");
             comboBox1.Items.Add("Amount Of Listing Per Country");
+
             comboBox2.Items.Add("Australia");
             comboBox2.Items.Add("Brazil");
             comboBox2.Items.Add("England");
@@ -244,6 +435,10 @@ namespace MAMJ_uupgift
             comboBox2.Items.Add("Spanien");
             comboBox2.Items.Add("Sri Lanka");
             comboBox2.Items.Add("Usa");
+
+            comboBox3.Items.Add("Billigast");
+            comboBox3.Items.Add("Nöjdaste");
+            comboBox3.Items.Add("Kompromiss");
 
             MappPerCountry();
             
@@ -275,7 +470,7 @@ namespace MAMJ_uupgift
         {
             if (comboBox2.Text == "Australia")
             {
-                ChoicePerCountry1 = "Au";
+                ChoicePerCountry1 = "AU";
             }
             else if (comboBox2.Text == "Brazil")
             {
@@ -314,6 +509,24 @@ namespace MAMJ_uupgift
                 ChoicePerCountry1 = "US";
             }
             else {}
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox3.Text == "Billigast")
+            {
+                ChoiceKpi = "BI";
+            }
+            else if (comboBox3.Text == "Nöjdaste")
+            {
+                ChoiceKpi = "NO";
+            }
+            else if (comboBox3.Text == "Kompromiss")
+            {
+                ChoiceKpi = "KO";
+            }
+            else { }
+
         }
     }
 }
