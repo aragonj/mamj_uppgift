@@ -266,6 +266,7 @@ namespace MAMJ_uupgift
                 chart7.Series["Series1"].Points.AddY(b.Price);
             }
             chart7.Series["Series1"].ChartType = SeriesChartType.Column;
+             this.BackColor = Color.FromArgb(255, 232, 232); // this should be pink-ish
         }
         private void plotchartFrankrike()
         {
