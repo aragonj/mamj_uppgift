@@ -186,6 +186,7 @@ namespace MAMJ_uupgift
             AveragePrice.Series["Countries"].Points.Clear();
             AveragePrice.Titles.Clear();
 
+
             if (ChoicePercountry == "AOS")
             {
                 foreach (Country x in world)
@@ -224,8 +225,8 @@ namespace MAMJ_uupgift
         {
 
         }
-        
-        
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -236,6 +237,9 @@ namespace MAMJ_uupgift
             comboBox1.Items.Add("Amount Of Listing Per Country");
             MappPerCountry();
             
+            
+
+
 
         }
 
@@ -245,16 +249,82 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry="AOS";
                 ChartPerCountry();
+
+                
+
+
             }
             else if (comboBox1.Text == "Average Price Per Country")
             {
                 ChoicePercountry= "APPC";
                 ChartPerCountry();
+
+                // Gör att länderna får olika färger
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
+                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
+
+                AveragePrice.Series["Countries"].Points[1].Color = Color.Beige;
+                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
+
+                AveragePrice.Series["Countries"].Points[2].Color = Color.Pink;
+                AveragePrice.Series["Countries"].AxisLabel = "Usa";
+
+                AveragePrice.Series["Countries"].Points[3].Color = Color.Green;
+                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
+
+                AveragePrice.Series["Countries"].Points[4].Color = Color.BlueViolet;
+                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
+
+                AveragePrice.Series["Countries"].Points[5].Color = Color.LightGoldenrodYellow;
+                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
+
+                AveragePrice.Series["Countries"].Points[6].Color = Color.LightGreen;
+                AveragePrice.Series["Countries"].AxisLabel = "England";
+
+                AveragePrice.Series["Countries"].Points[7].Color = Color.Firebrick;
+                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
+
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(245, 169, 188);
+                AveragePrice.Series["Countries"].AxisLabel = "Italien";
+
+                AveragePrice.Series["Countries"].Points[9].Color = Color.LightPink;
+                AveragePrice.Series["Countries"].AxisLabel = "Australia";
             }
             else if (comboBox1.Text == "Amount Of Listing Per Country")
             {
                 ChoicePercountry = "AOLPC";
                 ChartPerCountry();
+
+                // Gör att länderna får olika färger
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
+                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
+
+                AveragePrice.Series["Countries"].Points[1].Color = Color.Beige;
+                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
+
+                AveragePrice.Series["Countries"].Points[2].Color = Color.Pink;
+                AveragePrice.Series["Countries"].AxisLabel = "Usa";
+
+                AveragePrice.Series["Countries"].Points[3].Color = Color.Green;
+                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
+
+                AveragePrice.Series["Countries"].Points[4].Color = Color.BlueViolet;
+                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
+
+                AveragePrice.Series["Countries"].Points[5].Color = Color.LightGoldenrodYellow;
+                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
+
+                AveragePrice.Series["Countries"].Points[6].Color = Color.LightGreen;
+                AveragePrice.Series["Countries"].AxisLabel = "England";
+
+                AveragePrice.Series["Countries"].Points[7].Color = Color.Firebrick;
+                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
+
+                AveragePrice.Series["Countries"].Points[8].Color = Color.GreenYellow;
+                AveragePrice.Series["Countries"].AxisLabel = "Italien";
+
+                AveragePrice.Series["Countries"].Points[9].Color = Color.Red;
+                AveragePrice.Series["Countries"].AxisLabel = "Australia";
             }
             else { }
 
