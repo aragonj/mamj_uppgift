@@ -211,6 +211,8 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry="AOS";
                 ChartPerCountry();
+                AveragePrice.ChartAreas[0].AxisY.Maximum = 4.9;
+                AveragePrice.ChartAreas[0].AxisY.Minimum = 4.5;
 
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
@@ -250,6 +252,9 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry= "APPC";
                 ChartPerCountry();
+                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
+                AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
+                AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
@@ -286,6 +291,9 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry = "AOLPC";
                 ChartPerCountry();
+                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
+                AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
+                AveragePrice.ChartAreas[0].RecalculateAxesScale();
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
                 AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
