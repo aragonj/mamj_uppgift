@@ -9,42 +9,50 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Windows.Forms.DataVisualization.Charting;
+using GMap.NET;
+using GMap;
+using GMap.NET.MapProviders;
+using System.Diagnostics;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 
 namespace MAMJ_uupgift
 {
     public partial class Form1 : Form
     {
+        string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
+        string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
+        string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
+
         SqlConnection conn = new SqlConnection();
-        private Country valCountrySaintLucia;
-        private Country valCountrySpanien;
-        private Country valCountryUsa;
-        private Country valCountryPortugal;
-        private Country valCountryAustralia;
-        private Country valCountryBrazil;
-        private Country valCountrySriLanka;
-        private Country valCountryEngland;
-        private Country valCountryFrankrike;
-        private Country valCountryItalien;
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
-        private string ChoicePerCountry1;
-        private string ChoiceKpi;
+
+        List<string> countries = new List<string>()
+        {
+            "Saint_Lucia",
+            "Spanien",
+            "Usa",
+            "Portugal",
+            "Australia",
+            "Brazil",
+            "Sri_Lanka",
+            "England",
+            "Frankrike",
+            "Italien"
+        };
 
 
         public Form1()
 
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=DESKTOP-82O043O\\KURS6;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            conn.ConnectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
         private List<Accomodation> GetData(string myCountry)
         {
-
-
-
             List<Accomodation> accomodationsList = new List<Accomodation>();
-
-
+            
             try
             {
                 conn.Open();
@@ -95,8 +103,7 @@ namespace MAMJ_uupgift
                     letLong = myReader["Longitude"].ToString();
                     Longitude = double.Parse(letLong);
                     Last_modified = myReader["Last_modified"].ToString();
-
-
+                    
                     Accomodation accomodations = new Accomodation(
                         Room_id,
                         Host_id,
@@ -113,10 +120,7 @@ namespace MAMJ_uupgift
                         Longitude,
                         Last_modified);
                     accomodationsList.Add(accomodations);
-
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -126,60 +130,17 @@ namespace MAMJ_uupgift
             {
                 conn.Close();
             }
-
             return accomodationsList;
-
         }
-        private void CountryData()
+        private void CountryData(List<string> countries)
         {
-
-            List<Accomodation> saintLuciaList = GetData("Saint_Lucia");
-            Country SaintLucia1 = new Country("Saint_Lucia", 0, 0, saintLuciaList);
-            List<Accomodation> spanienList = GetData("Spanien");
-            Country Spanien1 = new Country("Spanien", 0, 0, spanienList);
-            List<Accomodation> usaList = GetData("Usa");
-            Country Usa1 = new Country("Usa", 0, 0, usaList);
-            List<Accomodation> portugalList = GetData("Portugal");
-            Country Portugal1 = new Country("Portugal", 0, 0, portugalList);
-            List<Accomodation> australiaList = GetData("Australia");
-            Country Australia1 = new Country("Australia", 0, 0, australiaList);
-            List<Accomodation> brazilList = GetData("Brazil");
-            Country Brazil1 = new Country("Brazil", 0, 0, brazilList);
-            List<Accomodation> sriLankaList = GetData("Sri_Lanka");
-            Country SriLanka1 = new Country("Sri_Lanka", 0, 0, sriLankaList);
-            List<Accomodation> englandList = GetData("England");
-            Country England1 = new Country("England", 0, 0, englandList);
-            List<Accomodation> frankrikeList = GetData("Frankrike");
-            Country Frankrike1 = new Country("Frankrike", 0, 0, frankrikeList);
-            List<Accomodation> italienList = GetData("Italien");
-            Country Italien1 = new Country("Italien", 0, 0, italienList);
-
-
-            valCountrySaintLucia = SaintLucia1;
-            valCountrySpanien = Spanien1;
-            valCountryUsa = Usa1;
-            valCountryPortugal = Portugal1;
-            valCountryBrazil = Brazil1;
-            valCountrySriLanka = SriLanka1;
-            valCountryEngland = England1;
-            valCountryFrankrike = Frankrike1;
-            valCountryItalien = Italien1;
-            valCountryAustralia = Australia1;
-
-            world.Add(SaintLucia1);
-            world.Add(Spanien1);
-            world.Add(Usa1);
-            world.Add(Portugal1);
-            world.Add(Brazil1);
-            world.Add(SriLanka1);
-            world.Add(England1);
-            world.Add(Frankrike1);
-            world.Add(Italien1);
-            world.Add(Australia1);
-
-
-
-
+            foreach(string element in countries)
+            {
+                List<Accomodation> hus = GetData(element);
+                Country temp = new Country(element, 0, 0, hus);
+                world.Add(temp);
+            }
+            
         }
         private void ChartPerCountry()
         {
@@ -220,233 +181,28 @@ namespace MAMJ_uupgift
             }
             else { }
         }
-
-        private void MappPerCountry()
-        {
-
-            if (ChoicePerCountry1 == "AU")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "BR")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "EN")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "FR")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            if (ChoicePerCountry1 == "IT")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "PO")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "SA")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "SP")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "SR")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "US")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else { }
-
-
-        }
-
-
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
-            CountryData();
+            karta.MapProvider = GMapProviders.GoogleMap;
+            karta.MinZoom = 1;
+            karta.MaxZoom = 100;
+            karta.Zoom = 15;
+            
+            CountryData(countries);
             AveragePrice.ChartAreas["ChartArea1"].AxisX.Interval = 1;
             comboBox1.Items.Add("Average Overall Satisfaction Per Country");
             comboBox1.Items.Add("Average Price Per Country");
             comboBox1.Items.Add("Amount Of Listing Per Country");
+            foreach(string country in countries)
+            {
+                comboBox2.Items.Add(country);
+            }
 
-            comboBox2.Items.Add("Australia");
-            comboBox2.Items.Add("Brazil");
-            comboBox2.Items.Add("England");
-            comboBox2.Items.Add("Frankrike");
-            comboBox2.Items.Add("Italien");
-            comboBox2.Items.Add("Portugal");
-            comboBox2.Items.Add("Saint Lucia");
-            comboBox2.Items.Add("Spanien");
-            comboBox2.Items.Add("Sri Lanka");
-            comboBox2.Items.Add("Usa");
-
-            comboBox3.Items.Add("Billigast");
-            comboBox3.Items.Add("Nöjdaste");
-            comboBox3.Items.Add("Kompromiss");
-
-            MappPerCountry();
-            
-            
-
-
-
+            for (int y = 1; y < 11; y++)
+            {
+                comboBox3.Items.Add(y.ToString());
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -568,67 +324,65 @@ namespace MAMJ_uupgift
 
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox2.Text == "Australia")
+            double xax = 0;
+            double yax = 0;
+            string statement = Program.CreateStatement(comboBox2.Text, nyttomaximering, comboBox3.Text);
+            List<Tuple<double, double>> accs = Program.TopList(statement);
+            GMapOverlay markers = new GMapOverlay("markers");
+            foreach (Tuple<double, double> element in accs)
             {
-                ChoicePerCountry1 = "AU";
+                PointLatLng point = new PointLatLng(element.Item1, element.Item2);
+                GMapMarker mark = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                markers.Markers.Add(mark);
+                xax = xax + element.Item1;
+                yax = yax + element.Item2;
             }
-            else if (comboBox2.Text == "Brazil")
-            {
-                ChoicePerCountry1 = "BR";
-            }
-            else if (comboBox2.Text == "England")
-            {
-                ChoicePerCountry1 = "EN";
-            }
-            else if (comboBox2.Text == "Frankrike")
-            {
-                ChoicePerCountry1 = "FR";
-            }
-            else if (comboBox2.Text == "Italien")
-            {
-                ChoicePerCountry1 = "IT";
-            }
-            else if (comboBox2.Text == "Portugal")
-            {
-                ChoicePerCountry1 = "PO";
-            }
-            else if (comboBox2.Text == "Saint Lucia")
-            {
-                ChoicePerCountry1 = "SA";
-            }
-            else if (comboBox2.Text == "Spanien")
-            {
-                ChoicePerCountry1 = "SP";
-            }
-            else if (comboBox2.Text == "Sri Lanka")
-            {
-                ChoicePerCountry1 = "SR";
-            }
-            else if (comboBox2.Text == "USA")
-            {
-                ChoicePerCountry1 = "US";
-            }
-            else {}
+            karta.Overlays.Clear();
+            karta.Overlays.Add(markers);
+            karta.Position = new GMap.NET.PointLatLng((xax/10), (yax/10));
+
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (comboBox3.Text == "Billigast")
+            double xax = 0;
+            double yax = 0;
+            string statement = Program.CreateStatement(comboBox2.Text, best, comboBox3.Text);
+            List<Tuple<double, double>> accs = Program.TopList(statement);
+            GMapOverlay markers = new GMapOverlay("markers");
+            foreach (Tuple<double, double> element in accs)
             {
-                ChoiceKpi = "BI";
+                PointLatLng point = new PointLatLng(element.Item1, element.Item2);
+                GMapMarker mark = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                markers.Markers.Add(mark);
+                xax = xax + element.Item1;
+                yax = yax + element.Item2;
             }
-            else if (comboBox3.Text == "Nöjdaste")
-            {
-                ChoiceKpi = "NO";
-            }
-            else if (comboBox3.Text == "Kompromiss")
-            {
-                ChoiceKpi = "KO";
-            }
-            else { }
+            karta.Overlays.Clear();
+            karta.Overlays.Add(markers);
+            karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            double xax = 0;
+            double yax = 0;
+            string statement = Program.CreateStatement(comboBox2.Text, cheap, comboBox3.Text);
+            List<Tuple<double, double>> accs = Program.TopList(statement);
+            GMapOverlay markers = new GMapOverlay("markers");
+            foreach (Tuple<double, double> element in accs)
+            {
+                PointLatLng point = new PointLatLng(element.Item1, element.Item2);
+                GMapMarker mark = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                markers.Markers.Add(mark);
+                xax = xax + element.Item1;
+                yax = yax + element.Item2;
+            }
+            karta.Overlays.Clear();
+            karta.Overlays.Add(markers);
+            karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
         }
     }
 }
