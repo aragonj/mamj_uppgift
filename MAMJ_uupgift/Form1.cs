@@ -31,7 +31,7 @@ namespace MAMJ_uupgift
            
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=DESKTOP-VRGDF71; Initial Catalog=Projekt_airbnb; Integrated Security=True";
+            conn.ConnectionString = "Data Source=VAIO\\SQL2017;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
 
         /// <summary> <c>GetData</c>
