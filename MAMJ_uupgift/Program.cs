@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using GMap.NET;
-using GMap;
-using GMap.NET.MapProviders;
 
 namespace MAMJ_uupgift
 {
@@ -19,15 +14,13 @@ namespace MAMJ_uupgift
         [STAThread]
         static void Main()
         {
-            string nyttomaximering = "select top 100 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            Debug.WriteLine(CreateStatement("Brazil", nyttomaximering, "4"));
-
+            
         }
         /// <summary>
-        /// Takes in SQL-querry and insert correct country name and number and return it as a string
+        /// Takes in SQL-querry string and insert correct country name and number and return it as a string
         /// </summary>
         /// <param name="country">table name in an SQL database</param>
         /// <param name="type">An SQL-querry that needs name of table and sorting number inserted</param>

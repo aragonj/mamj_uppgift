@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Windows.Forms.DataVisualization.Charting;
 using GMap.NET;
-using GMap;
 using GMap.NET.MapProviders;
 using System.Diagnostics;
 using GMap.NET.WindowsForms;
@@ -20,6 +19,7 @@ namespace MAMJ_uupgift
 {
     public partial class Form1 : Form
     {
+        // SQL-Strings used for data gathering
         string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
         string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
         string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
@@ -28,6 +28,7 @@ namespace MAMJ_uupgift
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
 
+        // String list of country names with tables in our database
         List<string> countries = new List<string>()
         {
             "Saint_Lucia",
@@ -42,13 +43,18 @@ namespace MAMJ_uupgift
             "Italien"
         };
 
-
         public Form1()
-
         {
             InitializeComponent();
+            //connectionstring for local database, need to be changed for every user
             conn.ConnectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
+
+        /// <summary>
+        /// Creates a list of Accommodations from a table in a SQL-database with connection "conn"
+        /// </summary>
+        /// <param name="myCountry">Must be the name of a table on SQL-server "conn" with variables from AirBnB data</param>
+        /// <returns>a list of accommodations</returns>
         private List<Accomodation> GetData(string myCountry)
         {
             List<Accomodation> accomodationsList = new List<Accomodation>();
@@ -132,6 +138,12 @@ namespace MAMJ_uupgift
             }
             return accomodationsList;
         }
+
+        /// <summary>
+        /// Poppulates a country list with countries filled with accommodations based on a databas from
+        /// <c>GetData</c> using a list of contrynames 
+        /// </summary>
+        /// <param name="countries">A string list with names that must be valid table names</param>
         private void CountryData(List<string> countries)
         {
             foreach(string element in countries)
@@ -142,6 +154,10 @@ namespace MAMJ_uupgift
             }
             
         }
+        /// <summary>
+        /// Uses data from an SQL-server to plot a chart named "AveragePrice" with diffrent statistics
+        /// based on a dropdown menue.
+        /// </summary>
         private void ChartPerCountry()
         {
             AveragePrice.Series["Countries"].Points.Clear();
@@ -182,13 +198,18 @@ namespace MAMJ_uupgift
             else { }
         }
         
+        // Initiate startvalues for this windows.form project
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Start values for GMaps
             karta.MapProvider = GMapProviders.GoogleMap;
+            karta.DragButton = MouseButtons.Left;
+            karta.Position = new GMap.NET.PointLatLng(59.3452809, 18.0212366);
             karta.MinZoom = 1;
             karta.MaxZoom = 100;
-            karta.Zoom = 15;
+            karta.Zoom = 11;
             
+            // Initiate  Values for Dropdown boxes
             CountryData(countries);
             AveragePrice.ChartAreas["ChartArea1"].AxisX.Interval = 1;
             comboBox1.Items.Add("Average Overall Satisfaction Per Country");
@@ -198,13 +219,13 @@ namespace MAMJ_uupgift
             {
                 comboBox2.Items.Add(country);
             }
-
             for (int y = 1; y < 11; y++)
             {
                 comboBox3.Items.Add(y.ToString());
             }
         }
 
+        // Plot some charts
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.Text == "Average Overall Satisfaction Per Country")
@@ -216,34 +237,15 @@ namespace MAMJ_uupgift
 
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
-
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
-
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].AxisLabel = "Usa";
-
                 AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
-
                 AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
-
                 AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
-
                 AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "England";
-
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
-
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Italien";
-
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Australia";
 
 
 
@@ -258,34 +260,15 @@ namespace MAMJ_uupgift
 
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
-
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
-
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].AxisLabel = "Usa";
-
                 AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
-
                 AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
-
                 AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
-
                 AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "England";
-
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
-
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Italien";
-
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Australia";
             }
             else if (comboBox1.Text == "Amount Of Listing Per Country")
             {
@@ -294,36 +277,18 @@ namespace MAMJ_uupgift
                 AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
                 AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
                 AveragePrice.ChartAreas[0].RecalculateAxesScale();
+
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
-
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
-
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].AxisLabel = "Usa";
-
                 AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
-
                 AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
-
                 AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
-
                 AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "England";
-
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
-
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Italien";
-
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Australia";
 
 
 
@@ -332,6 +297,7 @@ namespace MAMJ_uupgift
 
         }
 
+        // Plot coordinates from Accommodations using a GMaps API
         private void button1_Click(object sender, EventArgs e)
         {
             double xax = 0;
@@ -391,6 +357,11 @@ namespace MAMJ_uupgift
             karta.Overlays.Clear();
             karta.Overlays.Add(markers);
             karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
+        }
+
+        private void numberLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
