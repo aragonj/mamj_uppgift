@@ -17,7 +17,13 @@ namespace MAMJ_uupgift
 
 
 
-        // constructor
+        /// <summary>
+        /// Constructor for the Country class
+        /// </summary>
+        /// <param name="CountryNamn">Name of the country</param>
+        /// <param name="CountryInvånare">Number of inhabitants</param>
+        /// <param name="CountryBnpPerCapita">Made up numbers</param>
+        /// <param name="accommodates">Accommondation object, misspelled</param>
         public Country(string CountryNamn, int CountryInvånare, int CountryBnpPerCapita, List<Accomodation> accommodates)
         {
             countryNamn = CountryNamn;

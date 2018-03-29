@@ -20,12 +20,12 @@ namespace MAMJ_uupgift
             
         }
         /// <summary>
-        /// Takes in SQL-querry string and insert correct country name and number and return it as a string
+        /// Takes in a string (type) and swaps out every occurence of COUNTRY (country and NUMBER (number)
         /// </summary>
-        /// <param name="country">table name in an SQL database</param>
-        /// <param name="type">An SQL-querry that needs name of table and sorting number inserted</param>
-        /// <param name="number">number of accommondations to be sorted by</param>
-        /// <returns>A string that is an SQL querry</returns>
+        /// <param name="country">string that is replacing COUNTRY</param>
+        /// <param name="type">The string that eventually have parts swapped out</param>
+        /// <param name="number">string that is replacing NUMBER</param>
+        /// <returns>Returns a modified version of the string in statement "type"</returns>
         public static string CreateStatement(string country, string type, string number)
         {
             string correctString = type.Replace("COUNTRY", country);
@@ -34,7 +34,8 @@ namespace MAMJ_uupgift
         }
 
         /// <summary>
-        /// Fetch coordinates from the designated SQL-database.
+        /// Using an established SQL connection "conn" to excetue a SQL querry (statement)
+        /// Returning a list of double Tuple if possible.
         /// </summary>
         /// <param name="statement">String containing an SQL-querry that works with the current database</param>
         /// <returns>A list of XY coordinates for Accommodations</returns>

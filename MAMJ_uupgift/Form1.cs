@@ -19,7 +19,7 @@ namespace MAMJ_uupgift
 {
     public partial class Form1 : Form
     {
-        // SQL-Strings used for data gathering
+        // Strings representing SQL querries, used in conjunction with <c>TopList<c>
         string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
         string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
         string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
@@ -204,7 +204,7 @@ namespace MAMJ_uupgift
             // Start values for GMaps
             karta.MapProvider = GMapProviders.GoogleMap;
             karta.DragButton = MouseButtons.Left;
-            karta.Position = new GMap.NET.PointLatLng(59.3452809, 18.0212366);
+            karta.Position = new GMap.NET.PointLatLng(59.3452809, 18.0212366);//Nackademin coordinates
             karta.MinZoom = 1;
             karta.MaxZoom = 100;
             karta.Zoom = 11;
@@ -219,7 +219,7 @@ namespace MAMJ_uupgift
             {
                 comboBox2.Items.Add(country);
             }
-            for (int y = 1; y < 11; y++)
+            for (int y = 1; y < 30; y++)
             {
                 comboBox3.Items.Add(y.ToString());
             }
