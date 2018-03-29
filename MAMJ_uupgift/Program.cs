@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace MAMJ_uupgift
 {
@@ -18,16 +17,36 @@ namespace MAMJ_uupgift
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            
+        }
+        /// <summary>
+        /// Takes in a string (type) and swaps out every occurence of COUNTRY (country and NUMBER (number)
+        /// </summary>
+        /// <param name="country">string that is replacing COUNTRY</param>
+        /// <param name="type">The string that eventually have parts swapped out</param>
+        /// <param name="number">string that is replacing NUMBER</param>
+        /// <returns>Returns a modified version of the string in statement "type"</returns>
+        public static string CreateStatement(string country, string type, string number)
+        {
+            string correctString = type.Replace("COUNTRY", country);
+            string statement = correctString.Replace("NUMBER", number);
+            return statement;
         }
 
-        //string nyttomaximering = "select top 100 (overall_satisfaction/price) as nyttomaximering from Spanien where accommodates = 1 and overall_satisfaction != 0 order by nyttomaximering desc";
-        public static List<double> TopList(string statement)
+        /// <summary>
+        /// Using an established SQL connection "conn" to excetue a SQL querry (statement)
+        /// Returning a list of double Tuple if possible.
+        /// </summary>
+        /// <param name="statement">String containing an SQL-querry that works with the current database</param>
+        /// <returns>A list of XY coordinates for Accommodations</returns>
+        public static List<Tuple<double, double>> TopList(string statement)
         {
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = "Data Source=DESKTOP-VRGDF71; Initial Catalog=Projekt_airbnb; Integrated Security=True";
 
-            double temp;
-            List<double> listan = new List<double>();
+            double temp1;
+            double temp2;
+            List<Tuple<double, double>> listan = new List<Tuple<double, double>>();
             try
             {
                 conn.Open();
@@ -37,13 +56,15 @@ namespace MAMJ_uupgift
 
                 while (myReader.Read())
                 {
-                    temp = (double)myReader["nyttomaximering"];
+                    temp1 = (double)myReader["latitude"];
+                    temp2 = (double)myReader["longitude"];
+                    Tuple<double, double> temp = new Tuple<double, double>(temp1, temp2);
                     listan.Add(temp);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Debug.WriteLine(ex);
             }
             finally
             {

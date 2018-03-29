@@ -9,42 +9,56 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Windows.Forms.DataVisualization.Charting;
+using GMap.NET;
+using GMap.NET.MapProviders;
+using System.Diagnostics;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 
 namespace MAMJ_uupgift
 {
     public partial class Form1 : Form
     {
+        // Strings representing SQL querries, used in conjunction with <c>TopList<c>
+        string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
+        string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
+        string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
+
         SqlConnection conn = new SqlConnection();
-        private Country valCountrySaintLucia;
-        private Country valCountrySpanien;
-        private Country valCountryUsa;
-        private Country valCountryPortugal;
-        private Country valCountryAustralia;
-        private Country valCountryBrazil;
-        private Country valCountrySriLanka;
-        private Country valCountryEngland;
-        private Country valCountryFrankrike;
-        private Country valCountryItalien;
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
-        private string ChoicePerCountry1;
-        private string ChoiceKpi;
 
+        // String list of country names with tables in our database
+        List<string> countries = new List<string>()
+        {
+            "Saint_Lucia",
+            "Spanien",
+            "Usa",
+            "Portugal",
+            "Australia",
+            "Brazil",
+            "Sri_Lanka",
+            "England",
+            "Frankrike",
+            "Italien"
+        };
 
         public Form1()
-
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=DESKTOP-82O043O\\KURS6;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            //connectionstring for local database, need to be changed for every user
+            conn.ConnectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
+
+        /// <summary>
+        /// Creates a list of Accommodations from a table in a SQL-database with connection "conn"
+        /// </summary>
+        /// <param name="myCountry">Must be the name of a table on SQL-server "conn" with variables from AirBnB data</param>
+        /// <returns>a list of accommodations</returns>
         private List<Accomodation> GetData(string myCountry)
         {
-
-
-
             List<Accomodation> accomodationsList = new List<Accomodation>();
-
-
+            
             try
             {
                 conn.Open();
@@ -95,8 +109,7 @@ namespace MAMJ_uupgift
                     letLong = myReader["Longitude"].ToString();
                     Longitude = double.Parse(letLong);
                     Last_modified = myReader["Last_modified"].ToString();
-
-
+                    
                     Accomodation accomodations = new Accomodation(
                         Room_id,
                         Host_id,
@@ -113,10 +126,7 @@ namespace MAMJ_uupgift
                         Longitude,
                         Last_modified);
                     accomodationsList.Add(accomodations);
-
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -126,61 +136,28 @@ namespace MAMJ_uupgift
             {
                 conn.Close();
             }
-
             return accomodationsList;
-
         }
-        private void CountryData()
+
+        /// <summary>
+        /// Poppulates a country list with countries filled with accommodations based on a databas from
+        /// <c>GetData</c> using a list of contrynames 
+        /// </summary>
+        /// <param name="countries">A string list with names that must be valid table names</param>
+        private void CountryData(List<string> countries)
         {
-
-            List<Accomodation> saintLuciaList = GetData("Saint_Lucia");
-            Country SaintLucia1 = new Country("Saint_Lucia", 0, 0, saintLuciaList);
-            List<Accomodation> spanienList = GetData("Spanien");
-            Country Spanien1 = new Country("Spanien", 0, 0, spanienList);
-            List<Accomodation> usaList = GetData("Usa");
-            Country Usa1 = new Country("Usa", 0, 0, usaList);
-            List<Accomodation> portugalList = GetData("Portugal");
-            Country Portugal1 = new Country("Portugal", 0, 0, portugalList);
-            List<Accomodation> australiaList = GetData("Australia");
-            Country Australia1 = new Country("Australia", 0, 0, australiaList);
-            List<Accomodation> brazilList = GetData("Brazil");
-            Country Brazil1 = new Country("Brazil", 0, 0, brazilList);
-            List<Accomodation> sriLankaList = GetData("Sri_Lanka");
-            Country SriLanka1 = new Country("Sri_Lanka", 0, 0, sriLankaList);
-            List<Accomodation> englandList = GetData("England");
-            Country England1 = new Country("England", 0, 0, englandList);
-            List<Accomodation> frankrikeList = GetData("Frankrike");
-            Country Frankrike1 = new Country("Frankrike", 0, 0, frankrikeList);
-            List<Accomodation> italienList = GetData("Italien");
-            Country Italien1 = new Country("Italien", 0, 0, italienList);
-
-
-            valCountrySaintLucia = SaintLucia1;
-            valCountrySpanien = Spanien1;
-            valCountryUsa = Usa1;
-            valCountryPortugal = Portugal1;
-            valCountryBrazil = Brazil1;
-            valCountrySriLanka = SriLanka1;
-            valCountryEngland = England1;
-            valCountryFrankrike = Frankrike1;
-            valCountryItalien = Italien1;
-            valCountryAustralia = Australia1;
-
-            world.Add(SaintLucia1);
-            world.Add(Spanien1);
-            world.Add(Usa1);
-            world.Add(Portugal1);
-            world.Add(Brazil1);
-            world.Add(SriLanka1);
-            world.Add(England1);
-            world.Add(Frankrike1);
-            world.Add(Italien1);
-            world.Add(Australia1);
-
-
-
-
+            foreach(string element in countries)
+            {
+                List<Accomodation> hus = GetData(element);
+                Country temp = new Country(element, 0, 0, hus);
+                world.Add(temp);
+            }
+            
         }
+        /// <summary>
+        /// Uses data from an SQL-server to plot a chart named "AveragePrice" with diffrent statistics
+        /// based on a dropdown menue.
+        /// </summary>
         private void ChartPerCountry()
         {
             AveragePrice.Series["Countries"].Points.Clear();
@@ -220,272 +197,55 @@ namespace MAMJ_uupgift
             }
             else { }
         }
-
-        private void MappPerCountry()
-        {
-
-            if (ChoicePerCountry1 == "AU")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "BR")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "EN")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "FR")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            if (ChoicePerCountry1 == "IT")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "PO")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "SA")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "SP")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "SR")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else if (ChoicePerCountry1 == "US")
-            {
-                if (ChoiceKpi == "BI")
-                {
-
-                }
-                else if (ChoiceKpi == "NO")
-                {
-
-                }
-                else if (ChoiceKpi == "KO")
-                {
-
-                }
-                else { }
-
-            }
-            else { }
-
-
-        }
-
-
-
+        
+        // Initiate startvalues for this windows.form project
         private void Form1_Load(object sender, EventArgs e)
         {
-            CountryData();
+            // Start values for GMaps
+            karta.MapProvider = GMapProviders.GoogleMap;
+            karta.DragButton = MouseButtons.Left;
+            karta.Position = new GMap.NET.PointLatLng(59.3452809, 18.0212366);//Nackademin coordinates
+            karta.MinZoom = 1;
+            karta.MaxZoom = 100;
+            karta.Zoom = 11;
+            
+            // Initiate  Values for Dropdown boxes
+            CountryData(countries);
             AveragePrice.ChartAreas["ChartArea1"].AxisX.Interval = 1;
             comboBox1.Items.Add("Average Overall Satisfaction Per Country");
             comboBox1.Items.Add("Average Price Per Country");
             comboBox1.Items.Add("Amount Of Listing Per Country");
-
-            comboBox2.Items.Add("Australia");
-            comboBox2.Items.Add("Brazil");
-            comboBox2.Items.Add("England");
-            comboBox2.Items.Add("Frankrike");
-            comboBox2.Items.Add("Italien");
-            comboBox2.Items.Add("Portugal");
-            comboBox2.Items.Add("Saint Lucia");
-            comboBox2.Items.Add("Spanien");
-            comboBox2.Items.Add("Sri Lanka");
-            comboBox2.Items.Add("Usa");
-
-            comboBox3.Items.Add("Billigast");
-            comboBox3.Items.Add("Nöjdaste");
-            comboBox3.Items.Add("Kompromiss");
-
-            MappPerCountry();
-            
-            
-
-
-
+            foreach(string country in countries)
+            {
+                comboBox2.Items.Add(country);
+            }
+            for (int y = 1; y < 30; y++)
+            {
+                comboBox3.Items.Add(y.ToString());
+            }
         }
 
+        // Plot some charts
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.Text == "Average Overall Satisfaction Per Country")
             {
                 ChoicePercountry="AOS";
                 ChartPerCountry();
+                AveragePrice.ChartAreas[0].AxisY.Maximum = 4.9;
+                AveragePrice.ChartAreas[0].AxisY.Minimum = 4.5;
 
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
-
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
-
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].AxisLabel = "Usa";
-
                 AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
-
                 AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
-
                 AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
-
                 AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "England";
-
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
-
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Italien";
-
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Australia";
 
 
 
@@ -494,72 +254,41 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry= "APPC";
                 ChartPerCountry();
+                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
+                AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
+                AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
-
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
-
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].AxisLabel = "Usa";
-
                 AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
-
                 AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
-
                 AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
-
                 AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "England";
-
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
-
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Italien";
-
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Australia";
             }
             else if (comboBox1.Text == "Amount Of Listing Per Country")
             {
                 ChoicePercountry = "AOLPC";
                 ChartPerCountry();
+                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
+                AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
+                AveragePrice.ChartAreas[0].RecalculateAxesScale();
+
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].AxisLabel = "Saint_Lucia";
-
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].AxisLabel = "Spanien";
-
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].AxisLabel = "Usa";
-
                 AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].AxisLabel = "Portugal";
-
                 AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].AxisLabel = "Brazil";
-
                 AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Sri_Lanka";
-
                 AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "England";
-
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Frankrike";
-
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Italien";
-
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
-                AveragePrice.Series["Countries"].AxisLabel = "Australia";
 
 
 
@@ -568,66 +297,70 @@ namespace MAMJ_uupgift
 
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        // Plot coordinates from Accommodations using a GMaps API
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox2.Text == "Australia")
+            double xax = 0;
+            double yax = 0;
+            string statement = Program.CreateStatement(comboBox2.Text, nyttomaximering, comboBox3.Text);
+            List<Tuple<double, double>> accs = Program.TopList(statement);
+            GMapOverlay markers = new GMapOverlay("markers");
+            foreach (Tuple<double, double> element in accs)
             {
-                ChoicePerCountry1 = "AU";
+                PointLatLng point = new PointLatLng(element.Item1, element.Item2);
+                GMapMarker mark = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                markers.Markers.Add(mark);
+                xax = xax + element.Item1;
+                yax = yax + element.Item2;
             }
-            else if (comboBox2.Text == "Brazil")
-            {
-                ChoicePerCountry1 = "BR";
-            }
-            else if (comboBox2.Text == "England")
-            {
-                ChoicePerCountry1 = "EN";
-            }
-            else if (comboBox2.Text == "Frankrike")
-            {
-                ChoicePerCountry1 = "FR";
-            }
-            else if (comboBox2.Text == "Italien")
-            {
-                ChoicePerCountry1 = "IT";
-            }
-            else if (comboBox2.Text == "Portugal")
-            {
-                ChoicePerCountry1 = "PO";
-            }
-            else if (comboBox2.Text == "Saint Lucia")
-            {
-                ChoicePerCountry1 = "SA";
-            }
-            else if (comboBox2.Text == "Spanien")
-            {
-                ChoicePerCountry1 = "SP";
-            }
-            else if (comboBox2.Text == "Sri Lanka")
-            {
-                ChoicePerCountry1 = "SR";
-            }
-            else if (comboBox2.Text == "USA")
-            {
-                ChoicePerCountry1 = "US";
-            }
-            else {}
+            karta.Overlays.Clear();
+            karta.Overlays.Add(markers);
+            karta.Position = new GMap.NET.PointLatLng((xax/10), (yax/10));
+
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            if (comboBox3.Text == "Billigast")
+            double xax = 0;
+            double yax = 0;
+            string statement = Program.CreateStatement(comboBox2.Text, best, comboBox3.Text);
+            List<Tuple<double, double>> accs = Program.TopList(statement);
+            GMapOverlay markers = new GMapOverlay("markers");
+            foreach (Tuple<double, double> element in accs)
             {
-                ChoiceKpi = "BI";
+                PointLatLng point = new PointLatLng(element.Item1, element.Item2);
+                GMapMarker mark = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                markers.Markers.Add(mark);
+                xax = xax + element.Item1;
+                yax = yax + element.Item2;
             }
-            else if (comboBox3.Text == "Nöjdaste")
+            karta.Overlays.Clear();
+            karta.Overlays.Add(markers);
+            karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            double xax = 0;
+            double yax = 0;
+            string statement = Program.CreateStatement(comboBox2.Text, cheap, comboBox3.Text);
+            List<Tuple<double, double>> accs = Program.TopList(statement);
+            GMapOverlay markers = new GMapOverlay("markers");
+            foreach (Tuple<double, double> element in accs)
             {
-                ChoiceKpi = "NO";
+                PointLatLng point = new PointLatLng(element.Item1, element.Item2);
+                GMapMarker mark = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
+                markers.Markers.Add(mark);
+                xax = xax + element.Item1;
+                yax = yax + element.Item2;
             }
-            else if (comboBox3.Text == "Kompromiss")
-            {
-                ChoiceKpi = "KO";
-            }
-            else { }
+            karta.Overlays.Clear();
+            karta.Overlays.Add(markers);
+            karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
+        }
+
+        private void numberLabel_Click(object sender, EventArgs e)
+        {
 
         }
     }
