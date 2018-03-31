@@ -20,34 +20,27 @@ namespace MAMJ_uupgift
     public partial class Form1 : Form
     {
         // Strings representing SQL querries, used in conjunction with <c>TopList<c>
-        string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
-        string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
-        string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
+        string nyttomaximering = "select top QUANTITY (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 and price != 0 ORDER BY nyttomaximering DESC";
+        string best = "select top QUANTITY overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
+        string cheap = "select top QUANTITY overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
+
+        // When methods connect to a SQL database, this is the string used as a ConnectionString
+        static string connectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+        // Number of Accommondations to be plotted on the map
+        int quantity = 15;
 
         SqlConnection conn = new SqlConnection();
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
 
         // String list of country names with tables in our database
-        List<string> countries = new List<string>()
-        {
-            "Saint_Lucia",
-            "Spanien",
-            "Usa",
-            "Portugal",
-            "Australia",
-            "Brazil",
-            "Sri_Lanka",
-            "England",
-            "Frankrike",
-            "Italien"
-        };
+        List<string> countries = Program.TablenNames(connectionString);
 
         public Form1()
         {
             InitializeComponent();
             //connectionstring for local database, need to be changed for every user
-            conn.ConnectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            conn.ConnectionString = connectionString; //"Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
 
         /// <summary>
@@ -206,7 +199,7 @@ namespace MAMJ_uupgift
             karta.DragButton = MouseButtons.Left;
             karta.Position = new GMap.NET.PointLatLng(59.3452809, 18.0212366);//Nackademin coordinates
             karta.MinZoom = 1;
-            karta.MaxZoom = 100;
+            karta.MaxZoom = 25;
             karta.Zoom = 11;
             
             // Initiate  Values for Dropdown boxes
@@ -219,7 +212,7 @@ namespace MAMJ_uupgift
             {
                 comboBox2.Items.Add(country);
             }
-            for (int y = 1; y < 30; y++)
+            for (int y = 1; y < 16; y++)
             {
                 comboBox3.Items.Add(y.ToString());
             }
@@ -302,8 +295,9 @@ namespace MAMJ_uupgift
         {
             double xax = 0;
             double yax = 0;
-            string statement = Program.CreateStatement(comboBox2.Text, nyttomaximering, comboBox3.Text);
-            List<Tuple<double, double>> accs = Program.TopList(statement);
+            double numbers = 0.000001; // Noone likes dividing by Zero
+            string statement = Program.CreateStatement(comboBox2.Text, nyttomaximering, comboBox3.Text, quantity);
+            List<Tuple<double, double>> accs = Program.TopList(statement, connectionString);
             GMapOverlay markers = new GMapOverlay("markers");
             foreach (Tuple<double, double> element in accs)
             {
@@ -312,10 +306,11 @@ namespace MAMJ_uupgift
                 markers.Markers.Add(mark);
                 xax = xax + element.Item1;
                 yax = yax + element.Item2;
+                numbers = numbers + 1;
             }
             karta.Overlays.Clear();
             karta.Overlays.Add(markers);
-            karta.Position = new GMap.NET.PointLatLng((xax/10), (yax/10));
+            karta.Position = new GMap.NET.PointLatLng((xax / numbers), (yax / numbers));
 
         }
 
@@ -323,8 +318,9 @@ namespace MAMJ_uupgift
         {
             double xax = 0;
             double yax = 0;
-            string statement = Program.CreateStatement(comboBox2.Text, best, comboBox3.Text);
-            List<Tuple<double, double>> accs = Program.TopList(statement);
+            double numbers = 0.000001; // Noone likes dividing by Zero
+            string statement = Program.CreateStatement(comboBox2.Text, best, comboBox3.Text, quantity);
+            List<Tuple<double, double>> accs = Program.TopList(statement, connectionString);
             GMapOverlay markers = new GMapOverlay("markers");
             foreach (Tuple<double, double> element in accs)
             {
@@ -333,18 +329,20 @@ namespace MAMJ_uupgift
                 markers.Markers.Add(mark);
                 xax = xax + element.Item1;
                 yax = yax + element.Item2;
+                numbers = numbers + 1;
             }
             karta.Overlays.Clear();
             karta.Overlays.Add(markers);
-            karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
+            karta.Position = new GMap.NET.PointLatLng((xax / numbers), (yax / numbers));
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             double xax = 0;
             double yax = 0;
-            string statement = Program.CreateStatement(comboBox2.Text, cheap, comboBox3.Text);
-            List<Tuple<double, double>> accs = Program.TopList(statement);
+            double numbers = 0.000001; // Noone likes dividing by Zero
+            string statement = Program.CreateStatement(comboBox2.Text, cheap, comboBox3.Text, quantity);
+            List<Tuple<double, double>> accs = Program.TopList(statement, connectionString);
             GMapOverlay markers = new GMapOverlay("markers");
             foreach (Tuple<double, double> element in accs)
             {
@@ -353,10 +351,11 @@ namespace MAMJ_uupgift
                 markers.Markers.Add(mark);
                 xax = xax + element.Item1;
                 yax = yax + element.Item2;
+                numbers = numbers + 1;
             }
             karta.Overlays.Clear();
             karta.Overlays.Add(markers);
-            karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
+            karta.Position = new GMap.NET.PointLatLng((xax / numbers), (yax / numbers));
         }
 
         private void numberLabel_Click(object sender, EventArgs e)
