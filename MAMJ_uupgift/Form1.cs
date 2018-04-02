@@ -47,7 +47,7 @@ namespace MAMJ_uupgift
         {
             InitializeComponent();
             //connectionstring for local database, need to be changed for every user
-            conn.ConnectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            conn.ConnectionString = "Data Source=DESKTOP-82O043O\\KURS6;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
 
         /// <summary>
@@ -236,18 +236,18 @@ namespace MAMJ_uupgift
                 AveragePrice.ChartAreas[0].AxisY.Minimum = 4.5;
 
                 // Gör att länderna får olika färger
-                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(129, 232, 220);
+                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(129, 219, 232);
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(169, 208, 245);
+                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(169, 194, 245);
+                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(169, 180, 245);
+                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(122, 140, 249);
+                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(122, 174, 249);
+                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(122, 200, 249);
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(122, 225, 249);
+                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(122, 249, 244);
 
-
+              
 
             }
             else if (comboBox1.Text == "Average Price Per Country")
@@ -362,6 +362,43 @@ namespace MAMJ_uupgift
         private void numberLabel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hemsida_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://marcusson.biz/youngtravel/youngtravel.html");
+        }
+
+        private void LinkIn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("LinkInsida är inte tillgänglig", "LinkIn");
+        }
+
+        private void FaceBook_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.facebook.com/");
+        }
+
+        private void Twitter_Click(object sender, EventArgs e)
+        {
+
+            System.Diagnostics.Process.Start("https://twitter.com/?lang=sv");
+            
         }
     }
 }
