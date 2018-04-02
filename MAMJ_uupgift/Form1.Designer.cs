@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.AveragePrice = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -73,18 +73,18 @@
             this.AveragePrice.BorderlineColor = System.Drawing.Color.Transparent;
             this.AveragePrice.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             this.AveragePrice.BorderlineWidth = 4;
-            chartArea2.Name = "ChartArea1";
-            this.AveragePrice.ChartAreas.Add(chartArea2);
+            chartArea3.Name = "ChartArea1";
+            this.AveragePrice.ChartAreas.Add(chartArea3);
             this.AveragePrice.Name = "AveragePrice";
             this.AveragePrice.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
-            series2.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series2.Name = "Countries";
-            series2.YValuesPerPoint = 2;
-            this.AveragePrice.Series.Add(series2);
-            title2.Name = "Title1";
-            this.AveragePrice.Titles.Add(title2);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
+            series3.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series3.Name = "Countries";
+            series3.YValuesPerPoint = 2;
+            this.AveragePrice.Series.Add(series3);
+            title3.Name = "Title1";
+            this.AveragePrice.Titles.Add(title3);
             // 
             // comboBox1
             // 

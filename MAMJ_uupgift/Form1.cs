@@ -236,16 +236,16 @@ namespace MAMJ_uupgift
                 AveragePrice.ChartAreas[0].AxisY.Minimum = 4.5;
 
                 // Gör att länderna får olika färger
-                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(129, 232, 220);
-                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(129, 219, 232);
-                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(169, 208, 245);
-                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(169, 194, 245);
-                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(169, 180, 245);
-                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(122, 140, 249);
-                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(122, 174, 249);
-                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(122, 200, 249);
-                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(122, 225, 249);
-                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(122, 249, 244);
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb( 52, 52, 119);
+                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(47, 65, 114);
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110  );
+                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(38, 89, 106);
+                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(39,117,84);
+                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(51,138,46);
+                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(101,153,52);
+                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(122,159,53);
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(144,164,55);
+                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(166,169,56);
 
               
 
