@@ -238,7 +238,7 @@ namespace MAMJ_uupgift
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb( 52, 52, 119);
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(47, 65, 114);
-                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110  );
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110);
                 AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(38, 89, 106);
                 AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(39,117,84);
                 AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(51,138,46);
@@ -259,16 +259,16 @@ namespace MAMJ_uupgift
                 AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
                 // Gör att länderna får olika färger
-                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(52, 52, 119);
+                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(47, 65, 114);
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110);
+                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(38, 89, 106);
+                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(39, 117, 84);
+                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(51, 138, 46);
+                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(101, 153, 52);
+                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(122, 159, 53);
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(144, 164, 55);
+                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(166, 169, 56);
             }
             else if (comboBox1.Text == "Amount Of Listing Per Country")
             {
@@ -279,16 +279,16 @@ namespace MAMJ_uupgift
                 AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
                 // Gör att länderna får olika färger
-                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(245, 169, 188);
-                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(245, 169, 208);
-                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(245, 169, 225);
-                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(245, 169, 242);
-                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(226, 169, 243);
-                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(208, 169, 245);
-                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(169, 169, 245);
-                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(169, 188, 245);
-                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(169, 208, 245);
+                AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(52, 52, 119);
+                AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(47, 65, 114);
+                AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110);
+                AveragePrice.Series["Countries"].Points[3].Color = Color.FromArgb(38, 89, 106);
+                AveragePrice.Series["Countries"].Points[4].Color = Color.FromArgb(39, 117, 84);
+                AveragePrice.Series["Countries"].Points[5].Color = Color.FromArgb(51, 138, 46);
+                AveragePrice.Series["Countries"].Points[6].Color = Color.FromArgb(101, 153, 52);
+                AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(122, 159, 53);
+                AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(144, 164, 55);
+                AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(166, 169, 56);
 
 
 
