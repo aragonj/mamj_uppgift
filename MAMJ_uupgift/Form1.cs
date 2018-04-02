@@ -35,7 +35,7 @@ namespace MAMJ_uupgift
 
         {
             InitializeComponent();
-            conn.ConnectionString = "Data Source=DESKTOP-82O043O\\KURS6;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            conn.ConnectionString = "Data Source=VAIO\\SQL2017;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
         private List<Accomodation> GetData(string myCountry)
         {
@@ -185,6 +185,7 @@ namespace MAMJ_uupgift
         {
             AveragePrice.Series["Countries"].Points.Clear();
             AveragePrice.Titles.Clear();
+
 
 
             if (ChoicePercountry == "AOS")
@@ -628,6 +629,16 @@ namespace MAMJ_uupgift
                 ChoiceKpi = "KO";
             }
             else { }
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AveragePrice_Click(object sender, EventArgs e)
+        {
 
         }
     }

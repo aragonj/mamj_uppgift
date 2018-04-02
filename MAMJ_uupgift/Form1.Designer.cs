@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -43,21 +44,20 @@
             // 
             // AveragePrice
             // 
-            this.AveragePrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.AveragePrice.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.AveragePrice.BorderlineColor = System.Drawing.Color.Black;
-            this.AveragePrice.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            resources.ApplyResources(this.AveragePrice, "AveragePrice");
+            this.AveragePrice.BackColor = System.Drawing.Color.DimGray;
             this.AveragePrice.BorderlineWidth = 4;
+            chartArea2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDotDot;
             chartArea2.Name = "ChartArea1";
+            chartArea2.ShadowColor = System.Drawing.Color.WhiteSmoke;
             this.AveragePrice.ChartAreas.Add(chartArea2);
             legend2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             legend2.Font = new System.Drawing.Font("Modern No. 20", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             legend2.IsTextAutoFit = false;
             legend2.Name = "Legend1";
             this.AveragePrice.Legends.Add(legend2);
-            this.AveragePrice.Location = new System.Drawing.Point(12, 55);
             this.AveragePrice.Name = "AveragePrice";
-            this.AveragePrice.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
+            this.AveragePrice.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Light;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
             series2.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -65,69 +65,57 @@
             series2.Name = "Countries";
             series2.YValuesPerPoint = 2;
             this.AveragePrice.Series.Add(series2);
-            this.AveragePrice.Size = new System.Drawing.Size(551, 300);
-            this.AveragePrice.TabIndex = 0;
-            this.AveragePrice.Text = "Average Overall Satisfaction per country";
             title2.Name = "Title1";
             this.AveragePrice.Titles.Add(title2);
+            this.AveragePrice.Click += new System.EventHandler(this.AveragePrice_Click);
             // 
             // comboBox1
             // 
+            resources.ApplyResources(this.comboBox1, "comboBox1");
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(604, 55);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(251, 21);
-            this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // textBox1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Modern No. 20", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(215, 7);
+            resources.ApplyResources(this.textBox1, "textBox1");
+            this.textBox1.BackColor = System.Drawing.Color.DimGray;
+            this.textBox1.ForeColor = System.Drawing.Color.White;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(392, 42);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Young Travels Dashboard";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // vScrollBar1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(872, 55);
+            resources.ApplyResources(this.vScrollBar1, "vScrollBar1");
             this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(14, 657);
-            this.vScrollBar1.TabIndex = 4;
             // 
             // comboBox2
             // 
+            resources.ApplyResources(this.comboBox2, "comboBox2");
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(604, 378);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(251, 21);
-            this.comboBox2.TabIndex = 5;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox3
             // 
+            resources.ApplyResources(this.comboBox3, "comboBox3");
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(604, 425);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 6;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(910, 749);
+            this.BackColor = System.Drawing.Color.DimGray;
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.AveragePrice);
+            this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Name = "Form1";
-            this.Text = "MAMJ";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.AveragePrice)).EndInit();
             this.ResumeLayout(false);
