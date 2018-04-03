@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.AveragePrice = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -43,26 +43,25 @@
             this.numberLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Twitter = new System.Windows.Forms.Button();
             this.FaceBook = new System.Windows.Forms.Button();
-            this.LinkIn = new System.Windows.Forms.Button();
-            this.Hemsida = new System.Windows.Forms.Button();
-            this.Dashboard = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.hemsida = new System.Windows.Forms.Button();
+            this.map = new System.Windows.Forms.Button();
+            this.KPICharts = new System.Windows.Forms.Button();
+            this.KPIPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.MAPPanel = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.AveragePrice)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.KPIPanel.SuspendLayout();
+            this.MAPPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // AveragePrice
@@ -73,18 +72,18 @@
             this.AveragePrice.BorderlineColor = System.Drawing.Color.Transparent;
             this.AveragePrice.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
             this.AveragePrice.BorderlineWidth = 4;
-            chartArea3.Name = "ChartArea1";
-            this.AveragePrice.ChartAreas.Add(chartArea3);
+            chartArea4.Name = "ChartArea1";
+            this.AveragePrice.ChartAreas.Add(chartArea4);
             this.AveragePrice.Name = "AveragePrice";
             this.AveragePrice.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
-            series3.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            series3.Name = "Countries";
-            series3.YValuesPerPoint = 2;
-            this.AveragePrice.Series.Add(series3);
-            title3.Name = "Title1";
-            this.AveragePrice.Titles.Add(title3);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bubble;
+            series4.Font = new System.Drawing.Font("Modern No. 20", 8.249999F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series4.Name = "Countries";
+            series4.YValuesPerPoint = 2;
+            this.AveragePrice.Series.Add(series4);
+            title4.Name = "Title1";
+            this.AveragePrice.Titles.Add(title4);
             // 
             // comboBox1
             // 
@@ -168,7 +167,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.button9);
             this.panel1.Controls.Add(this.button8);
             this.panel1.Controls.Add(this.label1);
@@ -181,13 +179,6 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Name = "label3";
-            // 
-            // button10
-            // 
-            this.button10.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.button10, "button10");
-            this.button10.Name = "button10";
-            this.button10.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
@@ -214,9 +205,9 @@
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.Twitter);
             this.panel2.Controls.Add(this.FaceBook);
-            this.panel2.Controls.Add(this.LinkIn);
-            this.panel2.Controls.Add(this.Hemsida);
-            this.panel2.Controls.Add(this.Dashboard);
+            this.panel2.Controls.Add(this.hemsida);
+            this.panel2.Controls.Add(this.map);
+            this.panel2.Controls.Add(this.KPICharts);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
@@ -236,37 +227,38 @@
             this.FaceBook.UseVisualStyleBackColor = true;
             this.FaceBook.Click += new System.EventHandler(this.FaceBook_Click);
             // 
-            // LinkIn
+            // hemsida
             // 
-            this.LinkIn.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.LinkIn, "LinkIn");
-            this.LinkIn.Name = "LinkIn";
-            this.LinkIn.UseVisualStyleBackColor = true;
-            this.LinkIn.Click += new System.EventHandler(this.LinkIn_Click);
+            this.hemsida.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.hemsida, "hemsida");
+            this.hemsida.Name = "hemsida";
+            this.hemsida.UseVisualStyleBackColor = true;
+            this.hemsida.Click += new System.EventHandler(this.LinkIn_Click);
             // 
-            // Hemsida
+            // map
             // 
-            this.Hemsida.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.Hemsida, "Hemsida");
-            this.Hemsida.Name = "Hemsida";
-            this.Hemsida.UseVisualStyleBackColor = true;
-            this.Hemsida.Click += new System.EventHandler(this.hemsida_Click);
+            this.map.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.map, "map");
+            this.map.Name = "map";
+            this.map.UseVisualStyleBackColor = true;
+            this.map.Click += new System.EventHandler(this.hemsida_Click);
             // 
-            // Dashboard
+            // KPICharts
             // 
-            this.Dashboard.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.Dashboard, "Dashboard");
-            this.Dashboard.Name = "Dashboard";
-            this.Dashboard.UseVisualStyleBackColor = true;
+            this.KPICharts.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.KPICharts, "KPICharts");
+            this.KPICharts.Name = "KPICharts";
+            this.KPICharts.UseVisualStyleBackColor = true;
+            this.KPICharts.Click += new System.EventHandler(this.KPICharts_Click);
             // 
-            // panel3
+            // KPIPanel
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.comboBox1);
-            this.panel3.Controls.Add(this.AveragePrice);
-            resources.ApplyResources(this.panel3, "panel3");
-            this.panel3.Name = "panel3";
+            this.KPIPanel.BackColor = System.Drawing.Color.White;
+            this.KPIPanel.Controls.Add(this.label2);
+            this.KPIPanel.Controls.Add(this.comboBox1);
+            this.KPIPanel.Controls.Add(this.AveragePrice);
+            resources.ApplyResources(this.KPIPanel, "KPIPanel");
+            this.KPIPanel.Name = "KPIPanel";
             // 
             // label2
             // 
@@ -275,20 +267,20 @@
             this.label2.Name = "label2";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // panel4
+            // MAPPanel
             // 
-            this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.countryLabel);
-            this.panel4.Controls.Add(this.numberLabel);
-            this.panel4.Controls.Add(this.comboBox2);
-            this.panel4.Controls.Add(this.comboBox3);
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.karta);
-            this.panel4.Controls.Add(this.button2);
-            this.panel4.Controls.Add(this.button1);
-            resources.ApplyResources(this.panel4, "panel4");
-            this.panel4.Name = "panel4";
+            this.MAPPanel.BackColor = System.Drawing.Color.White;
+            this.MAPPanel.Controls.Add(this.label4);
+            this.MAPPanel.Controls.Add(this.countryLabel);
+            this.MAPPanel.Controls.Add(this.numberLabel);
+            this.MAPPanel.Controls.Add(this.comboBox2);
+            this.MAPPanel.Controls.Add(this.comboBox3);
+            this.MAPPanel.Controls.Add(this.button3);
+            this.MAPPanel.Controls.Add(this.karta);
+            this.MAPPanel.Controls.Add(this.button2);
+            this.MAPPanel.Controls.Add(this.button1);
+            resources.ApplyResources(this.MAPPanel, "MAPPanel");
+            this.MAPPanel.Name = "MAPPanel";
             // 
             // label4
             // 
@@ -313,8 +305,8 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.MAPPanel);
+            this.Controls.Add(this.KPIPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.Color.White;
@@ -324,10 +316,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.KPIPanel.ResumeLayout(false);
+            this.KPIPanel.PerformLayout();
+            this.MAPPanel.ResumeLayout(false);
+            this.MAPPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -344,14 +336,13 @@
         private System.Windows.Forms.Label numberLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel KPIPanel;
         private System.Windows.Forms.Button Twitter;
         private System.Windows.Forms.Button FaceBook;
-        private System.Windows.Forms.Button LinkIn;
-        private System.Windows.Forms.Button Hemsida;
-        private System.Windows.Forms.Button Dashboard;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button hemsida;
+        private System.Windows.Forms.Button map;
+        private System.Windows.Forms.Button KPICharts;
+        private System.Windows.Forms.Panel MAPPanel;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label1;

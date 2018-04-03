@@ -33,7 +33,7 @@ namespace MAMJ_uupgift
             countryBnpPerCapita = CountryBnpPerCapita;
             Accommodates = accommodates;
             AverageOverall_satisfaction = (from x in accommodates where x.Overall_satisfaction > 0 select x.Overall_satisfaction).Average();
-            //är detta en uträkning
+            //detta är uträkningen via metoden Average ifrån LINQ, inte samma x som i Form1, lokalt x
             AveragePrice = accommodates.Average(b => b.Price);
             CountListings = accommodates.Count;
 

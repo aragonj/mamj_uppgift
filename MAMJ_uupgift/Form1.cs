@@ -24,11 +24,14 @@ namespace MAMJ_uupgift
         // Strings representing SQL querries, used in conjunction with <c>TopList<c>
         //uträkningar som sker i SQL, presenteras i "best ranking" via kategorierna cheapst, value, best
         //vart är knapparna kodade?
+        // skapar 3 variabler, strängarna används senare
         string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
         string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
         string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
 
+        //skapar object
         SqlConnection conn = new SqlConnection();
+        //skapar en country lista med namnet world 
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
 
@@ -50,8 +53,9 @@ namespace MAMJ_uupgift
         //inkallar vår Metod Form1()
         public Form1()
         {
-            InitializeComponent(); 
-            //connectionstring for local database, need to be changed for every user
+            InitializeComponent();
+            //connectionstring for local database, need to be changed for every user, conn är ett naman på ett object, 
+            //ConnectionString är en variabel i objectet conn
             conn.ConnectionString = "Data Source=VAIO\\SQL2017;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
 
@@ -66,6 +70,7 @@ namespace MAMJ_uupgift
             
             try
             {
+                // conn har egenskaper som defineras tidigare, men körs först här. open är en metod som tillhör SQLconnectionkalssen
                 conn.Open();
 
                 SqlCommand myQuery = new SqlCommand("SELECT * FROM " + myCountry + ";", conn);
@@ -95,6 +100,7 @@ namespace MAMJ_uupgift
                 while (myReader.Read())
                 {
                     //definerar vad SQL datans datatyper skall bli i vår C# kod
+                    //room_id har bara ett värde åt gången
                     Room_id = (int)myReader["Room_id"];
                     Host_id = (int)myReader["Host_id"];
                     Room_type = (string)myReader["Room_type"];
@@ -108,7 +114,6 @@ namespace MAMJ_uupgift
                     Accommodates = (int)myReader["Accommodates"];
                     letPrice = myReader["Price"].ToString();
                     Price = double.Parse(letPrice);
-                    //vad är detta?
                     bool MinstayTest = int.TryParse(Convert.ToString(myReader["Minstay"]), out int Minstay);
                     if (MinstayTest == false)
                     {
@@ -121,6 +126,7 @@ namespace MAMJ_uupgift
                     Last_modified = myReader["Last_modified"].ToString();
                     
                     Accomodation accomodations = new Accomodation(
+                        //varje variabel nedan har nu värdet av en rad ifrån SQL databasen
                         Room_id,
                         Host_id,
                         Room_type,
@@ -144,22 +150,31 @@ namespace MAMJ_uupgift
             }
             finally
             {
+                //stänger ner anslutningen till SQL servern
                 conn.Close();
             }
+            //metoden getdata, hämtar data ifrån SQL servern, getdata är klar
             return accomodationsList;
         }
+        //getdata avslutas här
 
         /// <summary>
         /// Poppulates a country list with countries filled with accommodations based on a databas from
         /// <c>GetData</c> using a list of contrynames 
         /// </summary>
         /// <param name="countries">A string list with names that must be valid table names</param>
+        /// en metod som heter Countrydata, argument= vilka värden som skickas med metoden
+        /// list<string> countries inneh
         private void CountryData(List<string> countries)
         {
             foreach(string element in countries)
+                //10 obeject i countries 
             {
+                //hus innehåller alla accomodations från tabellen element 
                 List<Accomodation> hus = GetData(element);
                 Country temp = new Country(element, 0, 0, hus);
+
+                //temp adderas i listan world, sk få 10 object i listan world
                 world.Add(temp);
             }
             
@@ -170,15 +185,21 @@ namespace MAMJ_uupgift
         /// </summary>
         private void ChartPerCountry()
         {
+            //nament på charten.ifrån serien countries. ska irensa data, clear 
+            //obejct som innehållar object som innehåller object. som clear är en metod 
+            //vi tömmer data points och titlar på charten
             AveragePrice.Series["Countries"].Points.Clear();
             AveragePrice.Titles.Clear();
 
-
+            
             if (ChoicePercountry == "AOS")
+                //rad 240
             {
                 foreach (Country x in world)
+                    //x är ett country object typ spaninen i listan world
                 {
                     AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.AverageOverall_satisfaction);
+                    //x är lokalt ej samma som i country 
                 }
                 AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
                 AveragePrice.Titles.Add("Average Overall Satisfaction Per Country");
@@ -190,6 +211,7 @@ namespace MAMJ_uupgift
                 {
 
                     AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.AveragePrice);
+                    //x.AveragePrice hämtas ifrån contry, som räknar ut AVG ifrån vädert price ifrån accomodation
                 }
                 AveragePrice.Series["Countries"].ChartType = SeriesChartType.RangeColumn;
                 AveragePrice.Titles.Add("Average Price Per Country");
@@ -228,14 +250,16 @@ namespace MAMJ_uupgift
             foreach(string country in countries)
             {
                 comboBox2.Items.Add(country);
+                //dropdownen för maps som visar länder
             }
-            for (int y = 1; y < 30; y++)
+            for (int y = 1; y < 16; y++)
             {
                 comboBox3.Items.Add(y.ToString());
             }
         }
 
         // Plot some charts, IF satas som väljs i dropdown listan vid "KPI Charts"
+        //ny metod
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.Text == "Average Overall Satisfaction Per Country")
@@ -350,13 +374,16 @@ namespace MAMJ_uupgift
         }
 
         private void button3_Click(object sender, EventArgs e)
+            //metod för cheap knappen
         {
             double xax = 0;
             double yax = 0;
             string statement = Program.CreateStatement(comboBox2.Text, cheap, comboBox3.Text);
+            
             List<Tuple<double, double>> accs = Program.TopList(statement);
             GMapOverlay markers = new GMapOverlay("markers");
             foreach (Tuple<double, double> element in accs)
+                //accs är en lista
             {
                 PointLatLng point = new PointLatLng(element.Item1, element.Item2);
                 GMapMarker mark = new GMarkerGoogle(point, GMarkerGoogleType.blue_dot);
@@ -387,17 +414,18 @@ namespace MAMJ_uupgift
 
         private void label2_Click(object sender, EventArgs e)
         {
-
+            AveragePrice.Visible = false;
         }
 
         private void hemsida_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://marcusson.biz/youngtravel/youngtravel.html");
+            MAPPanel.Visible = true;
+            KPIPanel.Visible = false;
         }
 
         private void LinkIn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("LinkInsida är inte tillgänglig", "LinkIn");
+            System.Diagnostics.Process.Start("http://marcusson.biz/youngtravel/youngtravel.html");
         }
 
         private void FaceBook_Click(object sender, EventArgs e)
@@ -410,6 +438,12 @@ namespace MAMJ_uupgift
 
             System.Diagnostics.Process.Start("https://twitter.com/?lang=sv");
             
+        }
+
+        private void KPICharts_Click(object sender, EventArgs e)
+        {
+            MAPPanel.Visible = false;
+            KPIPanel.Visible = true;
         }
     }
 }
