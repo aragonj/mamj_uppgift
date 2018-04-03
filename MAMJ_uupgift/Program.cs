@@ -43,7 +43,7 @@ namespace MAMJ_uupgift
         public static List<Tuple<double, double>> TopList(string statement)
         {
             SqlConnection conn = new SqlConnection();
-            conn.ConnectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Projekt_airbnb; Integrated Security=True";
 
             //definerar 2 nya variabler som används till 
             double temp1;

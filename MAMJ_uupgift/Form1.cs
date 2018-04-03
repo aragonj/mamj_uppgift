@@ -52,7 +52,7 @@ namespace MAMJ_uupgift
         {
             InitializeComponent(); 
             //connectionstring for local database, need to be changed for every user
-            conn.ConnectionString = "Data Source=desktop-vrgdf71;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Projekt_airbnb; Integrated Security=True";
         }
 
         /// <summary>
