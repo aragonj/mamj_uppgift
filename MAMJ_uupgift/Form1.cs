@@ -7,19 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Windows.Forms.DataVisualization.Charting;
+using System.Data.SqlClient;//API som kopplar till SQL
+using System.Windows.Forms.DataVisualization.Charting;//API som kopplar till windows forms
 using GMap.NET;
 using GMap.NET.MapProviders;
 using System.Diagnostics;
 using GMap.NET.WindowsForms;
-using GMap.NET.WindowsForms.Markers;
+using GMap.NET.WindowsForms.Markers;//APIer till Gmap
+
 
 namespace MAMJ_uupgift
 {
+    //klass för windows form
     public partial class Form1 : Form
     {
         // Strings representing SQL querries, used in conjunction with <c>TopList<c>
+        //uträkningar som sker i SQL, presenteras i "best ranking" via kategorierna cheapst, value, best
+        //vart är knapparna kodade?
         string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
         string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
         string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
@@ -43,9 +47,10 @@ namespace MAMJ_uupgift
             "Italien"
         };
 
+        //inkallar vår Metod Form1()
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             //connectionstring for local database, need to be changed for every user
             conn.ConnectionString = "Data Source=VAIO\\SQL2017;Initial Catalog=Projekt_airbnb;Integrated Security=True";
         }
@@ -66,6 +71,8 @@ namespace MAMJ_uupgift
                 SqlCommand myQuery = new SqlCommand("SELECT * FROM " + myCountry + ";", conn);
                 SqlDataReader myReader = myQuery.ExecuteReader();
 
+                //definerar variabler som kommer från början fyllas med värden ifrån alla country,
+                //men sorteras ut under runtime via övrig kod
                 int Room_id;
                 int Host_id;
                 string Room_type;
@@ -84,8 +91,10 @@ namespace MAMJ_uupgift
                 string letLat;
                 string letLong;
 
+                //wihle loop som kör igenom SQL datasetet
                 while (myReader.Read())
                 {
+                    //definerar vad SQL datans datatyper skall bli i vår C# kod
                     Room_id = (int)myReader["Room_id"];
                     Host_id = (int)myReader["Host_id"];
                     Room_type = (string)myReader["Room_type"];
@@ -99,6 +108,7 @@ namespace MAMJ_uupgift
                     Accommodates = (int)myReader["Accommodates"];
                     letPrice = myReader["Price"].ToString();
                     Price = double.Parse(letPrice);
+                    //vad är detta?
                     bool MinstayTest = int.TryParse(Convert.ToString(myReader["Minstay"]), out int Minstay);
                     if (MinstayTest == false)
                     {
@@ -225,15 +235,15 @@ namespace MAMJ_uupgift
             }
         }
 
-        // Plot some charts
+        // Plot some charts, IF satas som väljs i dropdown listan vid "KPI Charts"
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.Text == "Average Overall Satisfaction Per Country")
             {
                 ChoicePercountry="AOS";
                 ChartPerCountry();
-                AveragePrice.ChartAreas[0].AxisY.Maximum = 4.9;
-                AveragePrice.ChartAreas[0].AxisY.Minimum = 4.5;
+                AveragePrice.ChartAreas[0].AxisY.Maximum = 4.9;//val av intervall på graf
+                AveragePrice.ChartAreas[0].AxisY.Minimum = 4.5;//val av intervall på graf
 
                 // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb( 52, 52, 119);
@@ -254,7 +264,7 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry= "APPC";
                 ChartPerCountry();
-                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
+                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;//skapar vi en variabel NaN? vad är NaN 
                 AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
                 AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
@@ -358,7 +368,8 @@ namespace MAMJ_uupgift
             karta.Overlays.Add(markers);
             karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
         }
-
+        //knappar som får klickfunktioner; vilken är vilekn? 
+        //de 3 i högra hörnet och den "översta-chartknappen" till vänster? stämmer det
         private void numberLabel_Click(object sender, EventArgs e)
         {
 
