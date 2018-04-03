@@ -17,7 +17,15 @@ namespace MAMJ_uupgift
 
 
 
-        // constructor
+        /// <summary>
+        /// Constructor for the Country class
+        /// </summary>
+        /// <param name="CountryNamn">Name of the country</param>
+        /// <param name="CountryInvånare">Number of inhabitants</param>
+        /// <param name="CountryBnpPerCapita">Made up numbers</param>
+        /// <param name="accommodates">Accommondation object, misspelled</param>
+        /// 
+        //skapar en klass country som innehåller värden: -- och lista accomodation
         public Country(string CountryNamn, int CountryInvånare, int CountryBnpPerCapita, List<Accomodation> accommodates)
         {
             countryNamn = CountryNamn;
@@ -25,6 +33,7 @@ namespace MAMJ_uupgift
             countryBnpPerCapita = CountryBnpPerCapita;
             Accommodates = accommodates;
             AverageOverall_satisfaction = (from x in accommodates where x.Overall_satisfaction > 0 select x.Overall_satisfaction).Average();
+            //är detta en uträkning
             AveragePrice = accommodates.Average(b => b.Price);
             CountListings = accommodates.Count;
 
