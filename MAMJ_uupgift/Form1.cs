@@ -18,12 +18,10 @@ using GMap.NET.WindowsForms.Markers;//APIer till Gmap
 
 namespace MAMJ_uupgift
 {
-    //klass för windows form
     public partial class Form1 : Form
     {
         // Strings representing SQL querries, used in conjunction with <c>TopList<c>
         //uträkningar som sker i SQL, presenteras i "best ranking" via kategorierna cheapst, value, best
-        //vart är knapparna kodade?
         string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
         string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
         string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
@@ -32,7 +30,6 @@ namespace MAMJ_uupgift
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
 
-        // String list of country names with tables in our database
         List<string> countries = new List<string>()
         {
             "Saint_Lucia",
@@ -47,19 +44,12 @@ namespace MAMJ_uupgift
             "Italien"
         };
 
-        //inkallar vår Metod Form1()
         public Form1()
         {
             InitializeComponent(); 
-            //connectionstring for local database, need to be changed for every user
             conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Projekt_airbnb; Integrated Security=True";
         }
 
-        /// <summary>
-        /// Creates a list of Accommodations from a table in a SQL-database with connection "conn"
-        /// </summary>
-        /// <param name="myCountry">Must be the name of a table on SQL-server "conn" with variables from AirBnB data</param>
-        /// <returns>a list of accommodations</returns>
         private List<Accomodation> GetData(string myCountry)
         {
             List<Accomodation> accomodationsList = new List<Accomodation>();
@@ -71,8 +61,6 @@ namespace MAMJ_uupgift
                 SqlCommand myQuery = new SqlCommand("SELECT * FROM " + myCountry + ";", conn);
                 SqlDataReader myReader = myQuery.ExecuteReader();
 
-                //definerar variabler som kommer från början fyllas med värden ifrån alla country,
-                //men sorteras ut under runtime via övrig kod
                 int Room_id;
                 int Host_id;
                 string Room_type;
@@ -91,7 +79,6 @@ namespace MAMJ_uupgift
                 string letLat;
                 string letLong;
 
-                //wihle loop som kör igenom SQL datasetet
                 while (myReader.Read())
                 {
                     //definerar vad SQL datans datatyper skall bli i vår C# kod
@@ -108,7 +95,6 @@ namespace MAMJ_uupgift
                     Accommodates = (int)myReader["Accommodates"];
                     letPrice = myReader["Price"].ToString();
                     Price = double.Parse(letPrice);
-                    //vad är detta?
                     bool MinstayTest = int.TryParse(Convert.ToString(myReader["Minstay"]), out int Minstay);
                     if (MinstayTest == false)
                     {
@@ -149,11 +135,6 @@ namespace MAMJ_uupgift
             return accomodationsList;
         }
 
-        /// <summary>
-        /// Poppulates a country list with countries filled with accommodations based on a databas from
-        /// <c>GetData</c> using a list of contrynames 
-        /// </summary>
-        /// <param name="countries">A string list with names that must be valid table names</param>
         private void CountryData(List<string> countries)
         {
             foreach(string element in countries)
@@ -164,10 +145,7 @@ namespace MAMJ_uupgift
             }
             
         }
-        /// <summary>
-        /// Uses data from an SQL-server to plot a chart named "AveragePrice" with diffrent statistics
-        /// based on a dropdown menue.
-        /// </summary>
+
         private void ChartPerCountry()
         {
             AveragePrice.Series["Countries"].Points.Clear();
@@ -264,7 +242,7 @@ namespace MAMJ_uupgift
             {
                 ChoicePercountry= "APPC";
                 ChartPerCountry();
-                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;//skapar vi en variabel NaN? vad är NaN 
+                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
                 AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
                 AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
@@ -368,8 +346,7 @@ namespace MAMJ_uupgift
             karta.Overlays.Add(markers);
             karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
         }
-        //knappar som får klickfunktioner; vilken är vilekn? 
-        //de 3 i högra hörnet och den "översta-chartknappen" till vänster? stämmer det
+
         private void numberLabel_Click(object sender, EventArgs e)
         {
 
