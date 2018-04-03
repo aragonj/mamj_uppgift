@@ -18,7 +18,6 @@ using GMap.NET.WindowsForms.Markers;//APIer till Gmap
 
 namespace MAMJ_uupgift
 {
-    //klass för windows form
     public partial class Form1 : Form
     {
         // Strings representing SQL querries, used in conjunction with <c>TopList<c>
@@ -47,7 +46,6 @@ namespace MAMJ_uupgift
             "Italien"
         };
 
-        //inkallar vår Metod Form1()
         public Form1()
         {
             InitializeComponent(); 
@@ -55,8 +53,6 @@ namespace MAMJ_uupgift
             conn.ConnectionString = "Data Source=JEROME\\SERVER2017; Initial Catalog=Projekt_airbnb; Integrated Security=True";
         }
 
-        /// <summary>
-        /// Creates a list of Accommodations from a table in a SQL-database with connection "conn"
         /// </summary>
         /// <param name="myCountry">Must be the name of a table on SQL-server "conn" with variables from AirBnB data</param>
         /// <returns>a list of accommodations</returns>
@@ -71,8 +67,6 @@ namespace MAMJ_uupgift
                 SqlCommand myQuery = new SqlCommand("SELECT * FROM " + myCountry + ";", conn);
                 SqlDataReader myReader = myQuery.ExecuteReader();
 
-                //definerar variabler som kommer från början fyllas med värden ifrån alla country,
-                //men sorteras ut under runtime via övrig kod
                 int Room_id;
                 int Host_id;
                 string Room_type;
@@ -94,7 +88,6 @@ namespace MAMJ_uupgift
                 //wihle loop som kör igenom SQL datasetet
                 while (myReader.Read())
                 {
-                    //definerar vad SQL datans datatyper skall bli i vår C# kod
                     Room_id = (int)myReader["Room_id"];
                     Host_id = (int)myReader["Host_id"];
                     Room_type = (string)myReader["Room_type"];
@@ -108,7 +101,6 @@ namespace MAMJ_uupgift
                     Accommodates = (int)myReader["Accommodates"];
                     letPrice = myReader["Price"].ToString();
                     Price = double.Parse(letPrice);
-                    //vad är detta?
                     bool MinstayTest = int.TryParse(Convert.ToString(myReader["Minstay"]), out int Minstay);
                     if (MinstayTest == false)
                     {
@@ -149,9 +141,6 @@ namespace MAMJ_uupgift
             return accomodationsList;
         }
 
-        /// <summary>
-        /// Poppulates a country list with countries filled with accommodations based on a databas from
-        /// <c>GetData</c> using a list of contrynames 
         /// </summary>
         /// <param name="countries">A string list with names that must be valid table names</param>
         private void CountryData(List<string> countries)
@@ -165,8 +154,7 @@ namespace MAMJ_uupgift
             
         }
         /// <summary>
-        /// Uses data from an SQL-server to plot a chart named "AveragePrice" with diffrent statistics
-        /// based on a dropdown menue.
+        /// chart named "AveragePrice" with diffrent statistics based on a dropdown menu.
         /// </summary>
         private void ChartPerCountry()
         {
@@ -236,7 +224,7 @@ namespace MAMJ_uupgift
 
             ChoicePercountry = "APPC";
             ChartPerCountry();
-            AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;//skapar vi en variabel NaN? vad är NaN 
+            AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN; 
             AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
             AveragePrice.ChartAreas[0].RecalculateAxesScale();
             panel3.Visible = true;
@@ -264,7 +252,6 @@ namespace MAMJ_uupgift
                 AveragePrice.ChartAreas[0].AxisY.Maximum = 4.9;//val av intervall på graf
                 AveragePrice.ChartAreas[0].AxisY.Minimum = 4.5;//val av intervall på graf
 
-                // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb( 52, 52, 119);
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(47, 65, 114);
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110);
@@ -275,19 +262,15 @@ namespace MAMJ_uupgift
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(122,159,53);
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(144,164,55);
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(166,169,56);
-
-              
-
             }
             else if (comboBox1.Text == "Average Price Per Country")
             {
                 ChoicePercountry= "APPC";
                 ChartPerCountry();
-                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;//skapar vi en variabel NaN? vad är NaN 
+                AveragePrice.ChartAreas[0].AxisY.Maximum = Double.NaN;
                 AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
                 AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
-                // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(52, 52, 119);
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(47, 65, 114);
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110);
@@ -307,7 +290,6 @@ namespace MAMJ_uupgift
                 AveragePrice.ChartAreas[0].AxisY.Minimum = Double.NaN;
                 AveragePrice.ChartAreas[0].RecalculateAxesScale();
 
-                // Gör att länderna får olika färger
                 AveragePrice.Series["Countries"].Points[0].Color = Color.FromArgb(52, 52, 119);
                 AveragePrice.Series["Countries"].Points[1].Color = Color.FromArgb(47, 65, 114);
                 AveragePrice.Series["Countries"].Points[2].Color = Color.FromArgb(40, 70, 110);
@@ -318,12 +300,8 @@ namespace MAMJ_uupgift
                 AveragePrice.Series["Countries"].Points[7].Color = Color.FromArgb(122, 159, 53);
                 AveragePrice.Series["Countries"].Points[8].Color = Color.FromArgb(144, 164, 55);
                 AveragePrice.Series["Countries"].Points[9].Color = Color.FromArgb(166, 169, 56);
-
-
-
             }
             else { }
-
         }
 
         // Plot coordinates from Accommodations using a GMaps API
@@ -345,7 +323,6 @@ namespace MAMJ_uupgift
             karta.Overlays.Clear();
             karta.Overlays.Add(markers);
             karta.Position = new GMap.NET.PointLatLng((xax/10), (yax/10));
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -387,8 +364,7 @@ namespace MAMJ_uupgift
             karta.Overlays.Add(markers);
             karta.Position = new GMap.NET.PointLatLng((xax / 10), (yax / 10));
         }
-        //knappar som får klickfunktioner; vilken är vilekn? 
-        //de 3 i högra hörnet och den "översta-chartknappen" till vänster? stämmer det
+
         private void numberLabel_Click(object sender, EventArgs e)
         {
 

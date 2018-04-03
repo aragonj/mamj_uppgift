@@ -19,10 +19,7 @@ namespace MAMJ_uupgift
             Application.Run(new Form1());
             
         }
-        /// <summary>
-        /// Takes in a string (type) and swaps out every occurence of COUNTRY (country and NUMBER (number)
-        /// tar ut varje händelse ifrån COUNTRY 
-        /// </summary>
+
         /// <param name="country">string that is replacing COUNTRY</param>
         /// <param name="type">The string that eventually have parts swapped out</param>
         /// <param name="number">string that is replacing NUMBER</param>
@@ -34,9 +31,6 @@ namespace MAMJ_uupgift
             return statement;
         }
 
-        /// <summary>
-        /// Using an established SQL connection "conn" to excetue a SQL querry (statement)
-        /// Returning a list of double Tuple if possible.
         /// </summary>
         /// <param name="statement">String containing an SQL-querry that works with the current database</param>
         /// <returns>A list of XY coordinates for Accommodations</returns>
@@ -51,7 +45,6 @@ namespace MAMJ_uupgift
             List<Tuple<double, double>> listan = new List<Tuple<double, double>>();
             try
             {
-                //öpnar variablen conn, som leder till from.cs
                 conn.Open();
 
               
