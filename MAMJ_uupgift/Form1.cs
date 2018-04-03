@@ -23,14 +23,15 @@ namespace MAMJ_uupgift
     {
         // Strings representing SQL querries, used in conjunction with <c>TopList<c>
         //uträkningar som sker i SQL, presenteras i "best ranking" via kategorierna cheapst, value, best
-        //vart är knapparna kodade?
         // skapar 3 variabler, strängarna används senare
+        //dessa 3 tillsammans värderas som "statement" i Program.CS rad 45 typ
         string nyttomaximering = "select top 10 (overall_satisfaction/price) as nyttomaximering, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY nyttomaximering DESC";
         string best = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY price ASC";
         string cheap = "select top 10 overall_satisfaction, price, latitude, longitude from COUNTRY where accommodates = NUMBER and overall_satisfaction != 0 ORDER BY overall_satisfaction ASC, price DESC";
 
         //skapar object
         SqlConnection conn = new SqlConnection();
+
         //skapar en country lista med namnet world 
         private List<Country> world = new List<Country>();
         private string ChoicePercountry;
@@ -65,6 +66,9 @@ namespace MAMJ_uupgift
         /// <param name="myCountry">Must be the name of a table on SQL-server "conn" with variables from AirBnB data</param>
         /// <returns>a list of accommodations</returns>
         private List<Accomodation> GetData(string myCountry)
+            //variabeln vi skapar är en lista Accomodation, GetData  är metoden som deklareras(kommer köras senare),(inargument,
+            //myCountry är en sträng)
+            //deklarera en metod är inte samma sak som att köra en metod
         {
             List<Accomodation> accomodationsList = new List<Accomodation>();
             
@@ -74,6 +78,7 @@ namespace MAMJ_uupgift
                 conn.Open();
 
                 SqlCommand myQuery = new SqlCommand("SELECT * FROM " + myCountry + ";", conn);
+                //myCountry är variabelstängen som alltid behövs när vi skall köra GetData Metoden
                 SqlDataReader myReader = myQuery.ExecuteReader();
 
                 //definerar variabler som kommer från början fyllas med värden ifrån alla country,
@@ -126,7 +131,8 @@ namespace MAMJ_uupgift
                     Last_modified = myReader["Last_modified"].ToString();
                     
                     Accomodation accomodations = new Accomodation(
-                        //varje variabel nedan har nu värdet av en rad ifrån SQL databasen
+                        //accomodations är ett nytt object
+                        //varje variabel nedan har nu värdet av en rad ifrån SQL databasen som skall vara i accomodations listan
                         Room_id,
                         Host_id,
                         Room_type,
@@ -142,6 +148,7 @@ namespace MAMJ_uupgift
                         Longitude,
                         Last_modified);
                     accomodationsList.Add(accomodations);
+                    //accomodations kommer här att populera (fylla på sina värden i ) accomodationsList
                 }
             }
             catch (Exception ex)
@@ -158,23 +165,31 @@ namespace MAMJ_uupgift
         }
         //getdata avslutas här
 
+
+
         /// <summary>
         /// Poppulates a country list with countries filled with accommodations based on a databas from
         /// <c>GetData</c> using a list of contrynames 
         /// </summary>
         /// <param name="countries">A string list with names that must be valid table names</param>
         /// en metod som heter Countrydata, argument= vilka värden som skickas med metoden
-        /// list<string> countries inneh
+        /// list<string> countries innehåller
+        /// 
+        
         private void CountryData(List<string> countries)
+            //här deklareras Metoden CountryData som behöver argumentet countries som är en lista,
+            //countries är endast en variabel som man kallar in när man vill använda metoden CountryData
         {
             foreach(string element in countries)
                 //10 obeject i countries 
             {
                 //hus innehåller alla accomodations från tabellen element 
                 List<Accomodation> hus = GetData(element);
+                //myCountry som var argumentwt för GetDatahur hänger det ihop med element? myCountry är bara 
+                //byter ut myCountry emot element som sen ommer bytas ut till en sträng coh sen kommer bli 1or och 0or
                 Country temp = new Country(element, 0, 0, hus);
 
-                //temp adderas i listan world, sk få 10 object i listan world
+                //temp adderas i listan world, ska få 10 object i listan world
                 world.Add(temp);
             }
             
@@ -185,15 +200,15 @@ namespace MAMJ_uupgift
         /// </summary>
         private void ChartPerCountry()
         {
-            //nament på charten.ifrån serien countries. ska irensa data, clear 
-            //obejct som innehållar object som innehåller object. som clear är en metod 
+            //nament på charten.ifrån serien countries. ska i rensa data, clear 
+            //obejct som innehållar object som innehåller object. som  clear är en metod 
             //vi tömmer data points och titlar på charten
             AveragePrice.Series["Countries"].Points.Clear();
             AveragePrice.Titles.Clear();
 
             
             if (ChoicePercountry == "AOS")
-                //rad 240
+                //så hoppar vi ner ikoden till vi hittar definitionen av AOS
             {
                 foreach (Country x in world)
                     //x är ett country object typ spaninen i listan world
@@ -219,6 +234,7 @@ namespace MAMJ_uupgift
             else if (ChoicePercountry == "AOLPC")
             {
                 foreach (Country x in world)
+                    //x är en lokal variabel 
                 {
 
                     AveragePrice.Series["Countries"].Points.AddXY(x.CountryNamn, x.CountListings);

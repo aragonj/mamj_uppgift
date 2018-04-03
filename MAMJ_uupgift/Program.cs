@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
+
 namespace MAMJ_uupgift
 {
     static class Program
@@ -28,6 +29,7 @@ namespace MAMJ_uupgift
         /// <param name="number">string that is replacing NUMBER</param>
         /// <returns>Returns a modified version of the string in statement "type"</returns>
         public static string CreateStatement(string country, string type, string number)
+            
         {
             string correctString = type.Replace("COUNTRY", country);
             string statement = correctString.Replace("NUMBER", number);
@@ -41,11 +43,13 @@ namespace MAMJ_uupgift
         /// <param name="statement">String containing an SQL-querry that works with the current database</param>
         /// <returns>A list of XY coordinates for Accommodations</returns>
         public static List<Tuple<double, double>> TopList(string statement)
+        //statement är tillsammans cheap,best, nyttomaximering som finns i Form.cs på rad 10 
         {
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = "Data Source=VAIO\\SQL2017;Initial Catalog=Projekt_airbnb;Integrated Security=True";
+            //conn är defienerat i Form1 
 
-            //definerar 2 nya variabler som används till 
+            //definerar 2 nya variabler som används till Gmaps
             double temp1;
             double temp2;
             List<Tuple<double, double>> listan = new List<Tuple<double, double>>();
@@ -56,6 +60,7 @@ namespace MAMJ_uupgift
 
               
                 SqlCommand myQuery = new SqlCommand(statement + ";", conn);
+                //statement är definerat som strängar i variablerna cheap, nyttomaximering, best ifrån Form1
                 SqlDataReader myReader = myQuery.ExecuteReader();
 
                 while (myReader.Read())
